@@ -11,6 +11,9 @@ export default function Footer() {
         </div>
         <p>Foundation Day Idea Presentation · IIHMR Bangalore</p>
         <p className="dim">ADMIRE – Center for Advancing Digital Health</p>
+        <p className="contact">
+          Any queries or issues? Contact <a href="mailto:admire@iihmrbangalore.edu.in">admire@iihmrbangalore.edu.in</a>
+        </p>
         <p className="dim credit">Some photographs from <a href="https://www.pexels.com" target="_blank" rel="noreferrer">Pexels</a>.</p>
       </div>
     </footer>

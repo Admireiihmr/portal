@@ -15,15 +15,22 @@ const ITEMS = [
 export default function SideNav() {
   const [active, setActive] = useState("top");
   useEffect(() => {
-    const io = new IntersectionObserver(
-      (es) => es.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    ITEMS.forEach(([id]) => {
-      const el = document.getElementById(id);
-      if (el) io.observe(el);
-    });
-    return () => io.disconnect();
+    // the current section is the last one whose top has passed the middle of the viewport (robust to big jumps)
+    const update = () => {
+      let cur: string = ITEMS[0][0];
+      for (const [id] of ITEMS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.5) cur = id;
+      }
+      setActive(cur);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
   return (
     <nav className="sidenav" aria-label="Sections">
