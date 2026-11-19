@@ -1,0 +1,79 @@
+export const TICKER_A = [
+  "Open theme",
+  "Individual entry",
+  "15 presenters",
+  "Poster or video",
+  "IIHMR students",
+  "Submit online",
+  "Domain tags",
+  "Expert review",
+];
+export const PHOTOS: { src: string; caption: string; wide?: boolean }[] = [
+  { src: "fd-16th.jpg", caption: "16th Foundation Day" },
+  { src: "campus-entrance.jpg", caption: "IIHMR Bangalore campus", wide: true },
+  { src: "fd-2025.jpg", caption: "Foundation Day & Alumni Meet 2025" },
+  { src: "admire-symposium-2.jpg", caption: "ADMIRE Digital Health Symposium" },
+  { src: "campus-group.jpg", caption: "Students on campus" },
+  { src: "fd-2016.jpg", caption: "Foundation Day 2016" },
+  { src: "admire-symposium-1.jpg", caption: "ADMIRE Digital Health Symposium" },
+  { src: "campus-event.jpg", caption: "Campus event" },
+  { src: "library.jpg", caption: "The IIHMR library" },
+];
+
+export const TICKER_B =["IIHMR Bangalore", "ADMIRE", "Foundation Day", "Your idea", "Digital health", "Innovation", "Impact"];
+
+export const STATS = [
+  { to: 15, suffix: "", label: "students present on stage" },
+  { to: 6, suffix: "", label: "awards to be won" },
+  { to: 4, suffix: " min", label: "to pitch your idea" },
+  { to: 7, suffix: " days", label: "submission window" },
+];
+
+export const RULES = [
+  { icon: "💡", title: "Any theme, any idea", text: "There is no fixed theme. If it can improve health, care, pharma or health-tech, it belongs here." },
+  { icon: "🎓", title: "IIHMR students only", text: "Open to our own students. First- and second-year students compete together on equal terms." },
+  { icon: "🧍", title: "Individual entry", text: "One student, one idea, one presenter. You may name people who helped you; they are acknowledged, and the certificate carries the presenter's name." },
+  { icon: "🏷️", title: "Tag, don't box", text: "No branch-wise categories. Simply tag the domains your idea touches, such as AI in healthcare or hospital operations." },
+  { icon: "📝", title: "Abstract first", text: "Upload your abstract in any common format. Experts review them and shortlist the best." },
+  { icon: "🎨", title: "Poster or video", text: "Shortlisted students receive a uniform template and present with a poster or an animated video, with a demo link if you built something." },
+];
+
+export const STEPS = [
+  { t: "Read the guidelines", d: "Know the rules: individual entry, one presenter, domain tags and the abstract format." },
+  { t: "Submit your abstract", d: "Fill in your details and upload your abstract on this page. It takes a couple of minutes." },
+  { t: "Submissions close", d: "After about a week the portal closes and every idea is grouped by domain." },
+  { t: "Expert review", d: "Domain experts read each abstract and pick the strongest five or six in their area." },
+  { t: "Shortlist of 15", d: "From the experts' picks, 15 students are selected to present on Foundation Day." },
+  { t: "Acceptance mail", d: "Selected students get a congratulation e-mail with the presentation template." },
+  { t: "Prepare your pitch", d: "Build a poster or an animated video with a short story: the problem, your idea and its impact." },
+  { t: "Foundation Day", d: "Present for about four minutes, meet the judges and compete for the awards." },
+];
+
+// one photo per step above, same order (a changed photo needs a new filename: Next caches optimised copies by name)
+export const STEP_IMAGES = [
+  "step-guidelines.jpg",
+  "step-submit.jpg",
+  "step-deadline.jpg",
+  "step-review.jpg",
+  "step-shortlist-standout.jpg",
+  "step-mail.jpg",
+  "step-pitch.jpg",
+  "step-foundation-day.jpg",
+];
+
+export const FUNNEL = [
+  { icon: "📝", short: "Everyone can submit", title: "Open to every IIHMR student", text: "Any student, any idea, any area of health. Submit one abstract online." },
+  { icon: "🔍", short: "Experts screen", title: "Domain experts review every abstract", text: "Each expert reads the abstracts in their area and picks the strongest." },
+  { icon: "🎯", short: "15 shortlisted", title: "Fifteen students make it to the stage", text: "You hear by e-mail and receive the presentation template." },
+  { icon: "🏆", short: "6 awards", title: "Three winners and three consolation awards", text: "Chosen on the day, with a certificate for every presenter." },
+];
+
+export const FAQ = [
+  { q: "Who can take part?", a: "Any current IIHMR Bangalore student, first or second year. The event is not open to external participants." },
+  { q: "Can I submit as a team?", a: "No. Entries are individual and there is a single presenter. You can list the names of people who helped you and they will be acknowledged, but the certificate is issued only in the presenter's name." },
+  { q: "What should my abstract contain?", a: "A short description of the problem, your idea, how it works and the impact you expect. A page or two is enough, in any format you like." },
+  { q: "Which file formats are accepted?", a: "Almost any: PDF, Word, PowerPoint, images, text, even a video. Only directly executable files (such as .exe) are blocked for safety. The maximum size is 25 MB." },
+  { q: "Do I have to pick a single domain?", a: "No. Tag as many domains as fit your idea. Cross-cutting ideas such as AI in pharma are welcome." },
+  { q: "How will I know if I am shortlisted?", a: "We will e-mail the address you give in the form, so please double-check it." },
+  { q: "Can I submit again if I made a mistake?", a: "Yes. Submit again with the same registration number and your files are kept together in your folder. The organisers will use the latest one." },
+];

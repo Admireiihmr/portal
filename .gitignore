@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+.env*.local
+submissions
+*.tsbuildinfo
+next-env.d.ts
+
+# contains the shared secret
+google-apps-script/Code.gs
