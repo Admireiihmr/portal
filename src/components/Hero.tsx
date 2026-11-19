@@ -37,6 +37,9 @@ export default function Hero() {
   const contentY = useTransform(p, [0, 1], [0, -120]);
   const tagO = useTransform(p, [0.6, 0.82], [0, 1]);
   const tagY = useTransform(p, [0.6, 0.85], [24, 0]);
+  // Both layers fill the stage; only the visible one may receive clicks, or the invisible one swallows them.
+  const tagPE = useTransform(tagO, (v) => (v > 0.5 ? "auto" : "none"));
+  const copyPE = useTransform(contentO, (v) => (v > 0.3 ? "auto" : "none"));
 
   // subtle pointer parallax on the card (desktop only, fades out as it expands)
   const mx = useMotionValue(0);
@@ -84,7 +87,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <motion.div key={zoom ? "copy-zoom" : "copy-static"} className="hero-copy" style={zoom ? { opacity: contentO, y: contentY } : undefined}>
+        <motion.div key={zoom ? "copy-zoom" : "copy-static"} className="hero-copy" style={zoom ? { opacity: contentO, y: contentY, pointerEvents: copyPE } : undefined}>
           <motion.p className="hero-pill" {...rise(0.05)}>
             <i className="live" aria-hidden /> Foundation Day 2026 · Submissions open
           </motion.p>
@@ -127,7 +130,7 @@ export default function Hero() {
         </motion.div>
 
         {zoom && (
-          <motion.div className="hero-tag" style={{ opacity: tagO, y: tagY }}>
+          <motion.div className="hero-tag" style={{ opacity: tagO, y: tagY, pointerEvents: tagPE }}>
             <p className="mono">IIHMR Bangalore × ADMIRE</p>
             <h2>
               Fifteen ideas.
