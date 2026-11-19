@@ -65,7 +65,10 @@ export default function Hero() {
       <div className="hero-stage">
         <div className="hero-grid" aria-hidden />
 
+        {/* keyed by mode: framer-motion leaves inline styles behind when a style prop is removed,
+            so switching desktop ↔ phone must remount these elements */}
         <motion.div
+          key={zoom ? "media-zoom" : "media-static"}
           className="hero-media"
           style={zoom ? { top, bottom, left, right, borderRadius: radius, x: px, y: py } : undefined}
           initial={{ opacity: 0, scale: reduce ? 1 : 0.97 }}
@@ -81,7 +84,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <motion.div className="hero-copy" style={zoom ? { opacity: contentO, y: contentY } : undefined}>
+        <motion.div key={zoom ? "copy-zoom" : "copy-static"} className="hero-copy" style={zoom ? { opacity: contentO, y: contentY } : undefined}>
           <motion.p className="hero-pill" {...rise(0.05)}>
             <i className="live" aria-hidden /> Foundation Day 2026 · Submissions open
           </motion.p>
