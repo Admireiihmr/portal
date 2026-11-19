@@ -11,8 +11,8 @@ export default function Faq() {
     <section id="faq" className="sec">
       <div className="wrap narrow">
         <Reveal>
-          <p className="eyebrow">(07) Good to know</p>
-          <SplitHeading text={"Questions,\nanswered"} />
+          <p className="label">07 — FAQ</p>
+          <SplitHeading text={"Frequently asked\nquestions"} />
         </Reveal>
         <div className="faq">
           {FAQ.map((f, i) => {

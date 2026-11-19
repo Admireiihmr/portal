@@ -20,7 +20,7 @@ export default function Ticker({
   items?: string[];
   children?: ReactNode;
   speed?: number; // % of one copy per second; negative = leftwards
-  variant?: "indigo" | "yellow" | "photos";
+  variant?: "indigo" | "yellow" | "photos" | "line";
 }) {
   const reduce = useReducedMotion();
   const baseX = useMotionValue(0);

@@ -66,7 +66,21 @@ Branches, domain tags and blocked file types are in `src/lib/config.ts`. Page te
 
 The hero uses `public/images/iihmr-building.jpg`, a crop of the building photo from the institute's website banner (low resolution). Replace that file with a high-resolution photo of the building (landscape, at least 2400 px wide) for the best result.
 
-## Deploying
+## Deploying on Vercel
+
+The site is live at https://portal-virid-chi-54.vercel.app/. In the Vercel project, open **Settings → Environment Variables** and add:
+
+| Name | Value |
+| --- | --- |
+| `GOOGLE_SCRIPT_URL` | the Apps Script Web app URL (ends in `/exec`) |
+| `GOOGLE_SCRIPT_SECRET` | the same secret you put in the script |
+| `NEXT_PUBLIC_DEADLINE_TEXT` | e.g. `7 December 2026, 5 pm` (optional) |
+
+Then redeploy. Without the first two, the live form shows "Submissions are not available".
+
+Vercel accepts about 4.5 MB per request, so on Vercel the abstract limit defaults to **4 MB** (set `NEXT_PUBLIC_MAX_FILE_MB` to change it; going above 4 will fail there).
+
+## Deploying elsewhere
 
 * Needs a Node host (a VM, Azure App Service, Railway, Render, etc.). **Vercel's serverless limit is ~4.5 MB per request**, so with 25 MB uploads use a Node server, or lower `NEXT_PUBLIC_MAX_FILE_MB` to 4.
 * Set the environment variables on the host; never commit `.env.local`.

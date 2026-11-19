@@ -44,17 +44,17 @@ export default function Spiral() {
   const [rise, setRise] = useState(90);
   const [step, setStep] = useState(40);
   const [active, setActive] = useState(0);
+  const [mobile, setMobile] = useState(false);
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const a = useTransform(p, [0, 1], [0, N - 1]);
   const rotateY = useTransform(a, (v) => -v * step);
   const y = useTransform(a, (v) => -v * rise);
-  const ring1 = useTransform(p, [0, 1], [0, 720]);
-  const ring2 = useTransform(p, [0, 1], [0, -540]);
   const fill = useTransform(p, [0, 1], ["0%", "100%"]);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 820px)");
     const f = () => {
+      setMobile(mq.matches);
       setRise(mq.matches ? 66 : 90);
       setStep(mq.matches ? 45 : 40);
     };
@@ -74,17 +74,34 @@ export default function Spiral() {
     else window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
   };
 
-  if (reduce) {
+  // Phones and reduced motion: a vertical timeline with photos instead of the 3D helix
+  if (reduce || mobile) {
     return (
-      <section id="journey" className="spiral-static">
+      <section id="journey" className="sec timeline-sec">
         <div className="wrap">
-          <p className="eyebrow">How it works</p>
-          <h2>Your journey, step by step</h2>
-          <ol className="steps-list">
-            {STEPS.map((s) => (
-              <li key={s.t}>
-                <b>{s.t}.</b> {s.d}
-              </li>
+          <p className="label">03 — How it works</p>
+          <h2>From idea to stage in eight steps</h2>
+          <ol className="timeline">
+            {STEPS.map((s, i) => (
+              <motion.li
+                key={s.t}
+                initial={{ opacity: 0, y: reduce ? 0 : 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                <span className="tl-dot">{i + 1}</span>
+                <div className="tl-card">
+                  <div className="tl-photo">
+                    <Image src={`/images/steps/${STEP_IMAGES[i]}`} alt="" fill sizes="(max-width: 820px) 90vw, 400px" style={{ objectFit: "cover", objectPosition: FOCUS[i] }} />
+                  </div>
+                  <div className="tl-body">
+                    <span className="mono">Step {i + 1} of {N}</span>
+                    <h3>{s.t}</h3>
+                    <p>{s.d}</p>
+                  </div>
+                </div>
+              </motion.li>
             ))}
           </ol>
         </div>
@@ -96,8 +113,8 @@ export default function Spiral() {
     <section ref={ref} id="journey" className="spiral" aria-label="Your journey, step by step">
       <div className="sp-stick">
         <div className="sp-head">
-          <p className="eyebrow yellow">(03) How it works · scroll to spiral through</p>
-          <h2>Your journey, step by step</h2>
+          <p className="label light">03 — How it works · scroll to move through</p>
+          <h2>From idea to stage in eight steps</h2>
         </div>
         <div className="sp-grid">
           <div className="sp-panel">
@@ -118,8 +135,6 @@ export default function Spiral() {
             </div>
           </div>
           <div className="sp-scene">
-            <motion.div className="sp-ring" style={{ rotate: ring1 }} />
-            <motion.div className="sp-ring r2" style={{ rotate: ring2 }} />
             <motion.div className="helix" style={{ rotateY, y }}>
               {STEPS.map((_, i) => (
                 <Card key={i} i={i} a={a} step={step} onPick={() => jump(i)} />

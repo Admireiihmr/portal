@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState, type DragEvent, type FormEvent } from "react";
 import { BRANCHES, DEADLINE_TEXT, DOMAINS, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
 import { normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
+import Icon from "./Icon";
 import Reveal from "./Reveal";
 import SplitHeading from "./SplitHeading";
 
@@ -133,8 +134,8 @@ export default function SubmitForm() {
     <section id="submit" className="sec submit">
       <div className="wrap grid2">
         <Reveal from="left" className="submit-side">
-          <p className="eyebrow yellow">(06) Your turn</p>
-          <SplitHeading text={"Pitch your idea\nto the panel"} />
+          <p className="label light">06 — Submit</p>
+          <SplitHeading text={"Submit your\nabstract"} />
           <p>Fill in the form and upload your abstract. We create a folder for you and keep everything together, so there is nothing else to send.</p>
           <ul className="checks">
             <li>Individual entry, one presenter</li>
@@ -166,7 +167,7 @@ export default function SubmitForm() {
                     <b>{ref}</b>
                   </div>
                   <p className="dim">Keep this reference. We will e-mail you if you are shortlisted.</p>
-                  <button className="btn btn-indigo" onClick={reset}>
+                  <button className="btn btn-primary" onClick={reset}>
                     Submit another idea
                   </button>
                 </motion.div>
@@ -177,7 +178,7 @@ export default function SubmitForm() {
                 </motion.div>
               ) : (
                 <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                  <h3>Submit your abstract</h3>
+                  <h3>Your details</h3>
                   <div className="row">
                     <div className="fld">
                       <label htmlFor="name">Full name *</label>
@@ -249,7 +250,7 @@ export default function SubmitForm() {
                       <input ref={input} type="file" hidden onChange={(e) => pick(e.target.files?.[0])} />
                       {file ? (
                         <div className="chip-file">
-                          <span className="fi" aria-hidden>📎</span>
+                          <span className="fi" aria-hidden><Icon name="clip" size={18} /></span>
                           <span className="fn">{file.name}</span>
                           <span className="fs">{fmt(file.size)}</span>
                           <button type="button" aria-label="Remove file" onClick={(e) => (e.stopPropagation(), setFile(null), setErrors((s) => ({ ...s, file: undefined })))}>
@@ -259,7 +260,7 @@ export default function SubmitForm() {
                       ) : (
                         <>
                           <motion.span className="up" aria-hidden animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
-                            ⬆
+                            <Icon name="upload" size={26} />
                           </motion.span>
                           <b>Drop your file here, or click to browse</b>
                           <small>Any format · up to {MAX_FILE_MB} MB</small>
@@ -289,7 +290,7 @@ export default function SubmitForm() {
                     </p>
                   )}
 
-                  <button className="btn btn-indigo big full" disabled={status === "sending"}>
+                  <button className="btn btn-primary btn-lg full" disabled={status === "sending"}>
                     {status === "sending" ? `Uploading… ${progress}%` : "Send my abstract"}
                   </button>
                   {status === "sending" && (

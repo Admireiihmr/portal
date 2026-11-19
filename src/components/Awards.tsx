@@ -1,64 +1,67 @@
 "use client";
-import { motion } from "framer-motion";
-import RotBadge from "./RotBadge";
+import { motion, useReducedMotion } from "framer-motion";
+import Icon from "./Icon";
 import Reveal from "./Reveal";
 import SplitHeading from "./SplitHeading";
 
 const POD = [
-  { n: "2", place: "Second place", sub: "Runner-up", cls: "p2", h: 230, d: 0.25, medal: "🥈" },
-  { n: "1", place: "First place", sub: "Winner", cls: "p1", h: 290, d: 0, medal: "🥇" },
-  { n: "3", place: "Third place", sub: "Second runner-up", cls: "p3", h: 190, d: 0.5, medal: "🥉" },
+  { n: 2, label: "Runner-up", h: 62 },
+  { n: 1, label: "Winner", h: 100 },
+  { n: 3, label: "Second runner-up", h: 44 },
 ];
 
-const EXTRA = [
-  { icon: "🏅", title: "3 consolation awards", sub: "Three more ideas are recognised" },
-  { icon: "🎤", title: "Your moment on stage", sub: "About four minutes to pitch to the panel" },
-  { icon: "📜", title: "Certificate", sub: "For every presenter, printed and digital", cert: true },
+const MORE = [
+  { icon: "medal", title: "3 consolation awards", text: "Three more ideas are recognised on the day." },
+  { icon: "mic", title: "Four minutes on stage", text: "Every finalist pitches to the expert panel." },
+  { icon: "cert", title: "Certificate", text: "For every presenter, printed and digital." },
 ];
 
 export default function Awards() {
+  const reduce = useReducedMotion();
   return (
-    <section id="awards" className="sec awards">
-      <div className="wrap rel">
-        <RotBadge className="awards-badge" light={false} text="Top 3 • 3 Consolation • Certificates •" centre="6" />
-        <Reveal>
-          <p className="eyebrow">(05) Recognition</p>
-          <SplitHeading text={"Six awards,\none big stage"} />
-          <p className="sub">The top three ideas win, three more are recognised with consolation awards, and every presenter receives a certificate. Award details will be announced by the organisers.</p>
-        </Reveal>
-
-        <div className="podium">
-          {POD.map((p) => (
-            <motion.div
-              key={p.n}
-              className={`pod ${p.cls}`}
-              initial={{ scaleY: 0.12, opacity: 0 }}
-              whileInView={{ scaleY: 1, opacity: 1 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ type: "spring", stiffness: 90, damping: 14, delay: p.d }}
-              style={{ height: p.h, transformOrigin: "bottom" }}
-            >
-              <span className="shine" aria-hidden />
-              <span className="medal">{p.medal}</span>
-              <span className="pl">{p.place}</span>
-              <span className="ps">{p.sub}</span>
-              <span className="pnum" aria-hidden>
-                {p.n}
-              </span>
-            </motion.div>
-          ))}
+    <section id="awards" className="sec">
+      <div className="wrap awards">
+        <div className="awards-copy">
+          <Reveal>
+            <p className="label">05 — Awards</p>
+          </Reveal>
+          <SplitHeading text={"Six awards\non the day"} />
+          <Reveal delay={0.1}>
+            <p className="intro">The top three ideas win, three more receive consolation awards, and every presenter gets a certificate. Award details will be announced by the organisers.</p>
+          </Reveal>
+          <ul className="more">
+            {MORE.map((m, i) => (
+              <Reveal key={m.title} delay={0.1 + i * 0.08}>
+                <li>
+                  <span className="more-ic">
+                    <Icon name={m.icon} size={20} />
+                  </span>
+                  <div>
+                    <b>{m.title}</b>
+                    <span>{m.text}</span>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
         </div>
-        <div className="podium-floor" aria-hidden />
 
-        <div className="cons">
-          {EXTRA.map((e, i) => (
-            <Reveal key={e.title} delay={i * 0.08}>
-              <div className={`cons-card ${e.cert ? "cert" : ""}`}>
-                <span className="medal">{e.icon}</span>
-                <b>{e.title}</b>
-                <small>{e.sub}</small>
-              </div>
-            </Reveal>
+        <div className="podium" aria-label="Top three places">
+          {POD.map((p, i) => (
+            <div className={`pod p${p.n}`} key={p.n}>
+              <span className="pod-label">{p.label}</span>
+              <motion.div
+                className="pod-bar"
+                style={{ height: `${p.h}%` }}
+                initial={{ scaleY: reduce ? 1 : 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.9, delay: 0.15 * i, ease: [0.2, 0.8, 0.2, 1] }}
+              >
+                {p.n === 1 && <Icon name="trophy" size={26} />}
+                <span className="pod-n">{p.n}</span>
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>

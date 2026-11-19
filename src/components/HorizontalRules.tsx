@@ -1,11 +1,11 @@
 "use client";
 import { motion, useMotionValueEvent, useReducedMotion, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { RULES } from "@/lib/content";
 import { useStickyProgress } from "@/lib/useStickyProgress";
-import Image from "next/image";
+import Icon from "./Icon";
 import SplitHeading from "./SplitHeading";
-import TiltCard from "./TiltCard";
 
 const N = RULES.length;
 // one photo per rule, in order (a changed photo needs a new filename: Next caches optimised copies by name)
@@ -16,25 +16,35 @@ const FOCUS = ["50% 50%", "50% 40%", "70% 30%", "50% 50%", "50% 40%", "50% 50%"]
 function RuleCard({ i }: { i: number }) {
   const r = RULES[i];
   return (
-    <TiltCard>
-      <span className="rule-no" aria-hidden>
-        {String(i + 1).padStart(2, "0")}
-      </span>
-      <span className="rule-ic" aria-hidden>
-        {r.icon}
-      </span>
-      <div className="rule-photo" aria-hidden="true">
-        <Image src={`/images/rules/${PHOTOS[i]}`} alt="" fill sizes="(max-width: 960px) 90vw, 420px" style={{ objectFit: "cover", objectPosition: FOCUS[i] }} />
+    <article className="rcard">
+      <div className="rcard-photo">
+        <Image src={`/images/rules/${PHOTOS[i]}`} alt="" fill sizes="(max-width: 900px) 80vw, 420px" style={{ objectFit: "cover", objectPosition: FOCUS[i] }} />
       </div>
-      <h3>{r.title}</h3>
-      <p>{r.text}</p>
-    </TiltCard>
+      <div className="rcard-body">
+        <div className="rcard-top">
+          <span className="rcard-ic">
+            <Icon name={r.icon} size={20} />
+          </span>
+          <span className="mono">Rule {String(i + 1).padStart(2, "0")}</span>
+        </div>
+        <h3>{r.title}</h3>
+        <p>{r.text}</p>
+      </div>
+    </article>
   );
 }
 
+const Header = ({ pinned }: { pinned?: boolean }) => (
+  <>
+    <p className="label">02 — Rules</p>
+    <SplitHeading text="Six things to know before you submit" />
+    <p className="intro">{pinned ? "Keep scrolling to move through them." : "Swipe through the cards."}</p>
+  </>
+);
+
 /**
- * Pinned section: the heading and a live counter stay on the left while vertical scrolling slides the
- * rule cards across the right. Falls back to a plain grid on small screens or for reduced motion.
+ * Desktop: pinned section, vertical scroll slides the cards sideways next to a live counter.
+ * Phones and reduced motion: a native swipe carousel with scroll-snap.
  */
 export default function HorizontalRules() {
   const ref = useRef<HTMLElement>(null);
@@ -47,7 +57,7 @@ export default function HorizontalRules() {
 
   useEffect(() => {
     const calc = () => {
-      const on = window.innerWidth >= 960 && !reduce;
+      const on = window.innerWidth >= 1000 && !reduce;
       setEnabled(on);
       if (on && track.current && win.current) setDist(Math.max(0, track.current.scrollWidth - win.current.clientWidth));
     };
@@ -71,13 +81,14 @@ export default function HorizontalRules() {
     return (
       <section id="rules" className="sec">
         <div className="wrap">
-          <p className="eyebrow">(02) Ground rules</p>
-          <SplitHeading text={"Simple rules,\nbig freedom"} />
-          <div className="rules-grid">
-            {RULES.map((_, i) => (
-              <RuleCard key={i} i={i} />
-            ))}
-          </div>
+          <Header />
+        </div>
+        <div className="rscroll" role="list">
+          {RULES.map((_, i) => (
+            <div className="rscroll-item" role="listitem" key={i}>
+              <RuleCard i={i} />
+            </div>
+          ))}
         </div>
       </section>
     );
@@ -87,9 +98,7 @@ export default function HorizontalRules() {
     <section ref={ref} id="rules" className="hrules" style={{ height: `calc(100vh + ${dist}px)` }}>
       <div className="hr-stick">
         <div className="hr-left">
-          <p className="eyebrow">(02) Ground rules</p>
-          <SplitHeading text={"Simple rules,\nbig freedom"} />
-          <p className="hr-sub">Six things to know before you submit. Keep scrolling to move through them.</p>
+          <Header pinned />
           <div className="hr-count" aria-live="polite">
             <b>{String(active + 1).padStart(2, "0")}</b>
             <span>/ {String(N).padStart(2, "0")}</span>

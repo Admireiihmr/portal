@@ -19,13 +19,13 @@ export default function ZoomBand() {
           <Image src="/images/students-laptop.jpg" alt="IIHMR Bangalore students working together on a laptop" fill quality={85} sizes="100vw" style={{ objectFit: "cover", objectPosition: "50% 35%" }} />
         </motion.div>
         <motion.div className="zb-text" style={{ opacity: textO, y: textY }}>
-          <p className="eyebrow yellow">IIHMR Bangalore · ADMIRE</p>
+          <p className="label light">IIHMR Bangalore × ADMIRE</p>
           <h2>
-            Where student ideas
+            Your idea, in front
             <br />
-            meet real impact
+            of an expert panel
           </h2>
-          <p>Fifteen students. One Foundation Day stage. Backed by the Center for Advancing Digital Health and live project apps.</p>
+          <p>Foundation Day gives fifteen students the stage, with ADMIRE, the Center for Advancing Digital Health, behind the event.</p>
         </motion.div>
       </div>
     </section>

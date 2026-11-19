@@ -25,7 +25,9 @@ export const DOMAINS = [
   "Something else",
 ] as const;
 
-export const MAX_FILE_MB = Number(process.env.NEXT_PUBLIC_MAX_FILE_MB ?? 25) || 25;
+// Vercel's serverless functions accept ~4.5 MB per request, so default to 4 MB there and 25 MB elsewhere.
+const DEFAULT_MAX_MB = process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.VERCEL ? 4 : 25;
+export const MAX_FILE_MB = Number(process.env.NEXT_PUBLIC_MAX_FILE_MB ?? DEFAULT_MAX_MB) || DEFAULT_MAX_MB;
 // A short block-list of directly executable types. Everything else is accepted.
 export const BLOCKED_EXTENSIONS = ["exe", "msi", "bat", "cmd", "com", "scr", "vbs", "ps1", "dll", "jar", "apk"];
 
