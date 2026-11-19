@@ -16,7 +16,7 @@ import SplitHeading from "@/components/SplitHeading";
 import SubmitForm from "@/components/SubmitForm";
 import Ticker from "@/components/Ticker";
 import ZoomBand from "@/components/ZoomBand";
-import { STATS, TICKER_A } from "@/lib/content";
+import { STATS, TICKER_A, TICKER_B } from "@/lib/content";
 
 export default function Home() {
   return (
@@ -26,8 +26,10 @@ export default function Home() {
       <main>
         <Hero />
 
-        <div className="strip">
-          <Ticker items={TICKER_A} speed={-2.2} variant="line" />
+        <div className="tickers">
+          <Ticker items={TICKER_A} speed={-3} variant="indigo" />
+          <Ticker items={TICKER_B} speed={3} variant="yellow" />
+          <PhotoTicker />
         </div>
 
         <section id="about" className="sec">
@@ -59,7 +61,6 @@ export default function Home() {
           </div>
         </section>
 
-        <PhotoTicker />
         <HorizontalRules />
         <Spiral />
         <Funnel />

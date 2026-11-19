@@ -156,6 +156,15 @@ img { display: block; max-width: 100%; }
 .ticker.line { padding: 18px 0; }
 .ticker.line .tk-item { display: inline-flex; align-items: center; gap: 28px; padding: 0 14px; font-family: var(--font-mono), monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
 .ticker.line .tk-item::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--brand-2); }
+/* bold tilted bands under the hero */
+.tickers { position: relative; z-index: 5; overflow: hidden; padding: 0 0 8px; margin-top: -14px; }
+.ticker.indigo, .ticker.yellow { padding: 16px 0; margin: 0 -24px; }
+.ticker.indigo { background: var(--brand); color: #fff; transform: rotate(-1.2deg); box-shadow: 0 10px 30px -10px rgba(40, 28, 90, 0.45); }
+.ticker.yellow { background: var(--accent); color: var(--dark); transform: rotate(1deg); margin-top: -2px; }
+.ticker.indigo .tk-item, .ticker.yellow .tk-item { display: inline-flex; align-items: center; gap: 40px; padding: 0 20px; font: 700 clamp(1.05rem, 2.6vw, 1.7rem)/1.1 var(--font-display), sans-serif; letter-spacing: -0.01em; text-transform: uppercase; }
+.ticker.indigo .tk-item::after { content: "✦"; color: var(--accent); font-size: 0.75em; }
+.ticker.yellow .tk-item::after { content: "✦"; color: var(--brand); font-size: 0.75em; }
+.tickers .ticker.photos { margin-top: 28px; }
 .ticker.photos { margin-top: clamp(64px, 9vw, 110px); position: relative; }
 .ticker.photos::before, .ticker.photos::after { content: ""; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
 .ticker.photos::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
