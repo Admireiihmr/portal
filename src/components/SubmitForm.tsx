@@ -1,11 +1,10 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState, type DragEvent, type FormEvent } from "react";
+import { useRef, useState, type DragEvent, type FormEvent, type ReactNode } from "react";
 import { BRANCHES, DEADLINE_TEXT, DOMAINS, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
 import { normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
-import SplitHeading from "./SplitHeading";
 
 type Status = "idle" | "sending" | "done";
 
@@ -25,6 +24,77 @@ function Confetti() {
         />
       ))}
     </div>
+  );
+}
+
+// icon for each domain chip, in the same order as DOMAINS in config.ts
+const DOMAIN_ICONS = ["heart", "monitor", "building", "pill", "users", "code", "monitor", "coins", "user", "dots"];
+
+/** Label row with an icon in the left gutter. Defined outside the form so inputs keep focus while typing. */
+function Field({ icon, children }: { icon: string; children: ReactNode }) {
+  return (
+    <div className="fld xf">
+      <span className="xf-ic" aria-hidden>
+        <Icon name={icon} size={20} />
+      </span>
+      <div className="xf-body">{children}</div>
+    </div>
+  );
+}
+
+/** Laptop with an uploading document, a glowing bulb and a stack of books. */
+function SubmitArt() {
+  return (
+    <svg viewBox="0 0 360 230" aria-hidden="true">
+      <defs>
+        <linearGradient id="saV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#9a7dff" />
+          <stop offset="1" stopColor="#5b3bd6" />
+        </linearGradient>
+        <radialGradient id="saGold" cx="40%" cy="35%" r="70%">
+          <stop offset="0" stopColor="#fff3b0" />
+          <stop offset=".55" stopColor="#f9c63a" />
+          <stop offset="1" stopColor="#d99410" />
+        </radialGradient>
+        <filter id="saGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="5" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      {/* laptop */}
+      <rect x="40" y="58" width="170" height="118" rx="10" fill="url(#saV)" />
+      <rect x="50" y="68" width="150" height="98" rx="6" fill="#2b1d70" />
+      <path d="M20 180h210l-14 18H34z" fill="#8f73f2" />
+      <path d="M20 180h210" stroke="#c4b2ff" strokeWidth="3" />
+      {/* document rising out of the screen */}
+      <g className="sa-doc">
+        <rect x="78" y="24" width="96" height="128" rx="8" fill="#f4f0ff" stroke="#c9bbff" strokeWidth="2" />
+        <rect x="92" y="98" width="68" height="6" rx="3" fill="#c9bbff" />
+        <rect x="92" y="112" width="56" height="6" rx="3" fill="#c9bbff" />
+        <rect x="92" y="126" width="62" height="6" rx="3" fill="#c9bbff" />
+        <rect x="104" y="44" width="44" height="40" rx="10" fill="url(#saV)" />
+        <path d="M126 76V56M118 63l8-8 8 8" stroke="#fff" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+      {/* books */}
+      <rect x="236" y="168" width="104" height="20" rx="4" fill="#7a5df0" />
+      <rect x="236" y="168" width="104" height="5" rx="2" fill="#f7e6c4" />
+      <rect x="244" y="146" width="90" height="22" rx="4" fill="#9a7dff" />
+      <rect x="244" y="146" width="90" height="5" rx="2" fill="#f7e6c4" />
+      {/* bulb */}
+      <g className="sa-bulb">
+        <g stroke="#f9c63a" strokeWidth="4" strokeLinecap="round">
+          <path d="M290 18v-10M262 28l-7-7M318 28l7-7M250 56h-10M330 56h10" />
+        </g>
+        <circle cx="290" cy="64" r="34" fill="url(#saGold)" filter="url(#saGlow)" />
+        <path d="M278 66l8-10 6 14 8-12" stroke="#fff6d6" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <rect x="276" y="98" width="28" height="9" rx="4" fill="#c9bbff" />
+        <rect x="279" y="109" width="22" height="9" rx="4" fill="#9a7dff" />
+        <rect x="270" y="120" width="40" height="24" rx="6" fill="url(#saV)" />
+      </g>
+    </svg>
   );
 }
 
@@ -131,27 +201,54 @@ export default function SubmitForm() {
   const aria = (k: keyof FieldErrors) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `e-${k}` : undefined });
 
   return (
-    <section id="submit" className="sec submit">
-      <div className="wrap grid2">
-        <Reveal from="left" className="submit-side">
-          <p className="label light">06 — Submit</p>
-          <SplitHeading text={"Submit your\nabstract"} />
-          <p>Fill in the form and upload your abstract. We create a folder for you and keep everything together, so there is nothing else to send.</p>
-          <ul className="checks">
-            <li>Individual entry, one presenter</li>
-            <li>Any theme, any format for the abstract</li>
-            <li>Up to {MAX_FILE_MB} MB per file</li>
+    <section id="submit" className="sx">
+      <svg className="sx-waves" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+        {Array.from({ length: 6 }, (_, i) => (
+          <path key={i} d={`M-100 ${200 + i * 9} C 260 ${90 + i * 10}, 640 ${280 - i * 6}, 980 ${170 + i * 7} S 1380 ${70 + i * 9}, 1600 ${160 + i * 5}`} fill="none" stroke="#c4adff" strokeWidth={i === 2 ? 2 : 1} opacity={0.18 + (i === 2 ? 0.4 : (i % 3) * 0.08)} />
+        ))}
+      </svg>
+      <div className="wrap sx-grid">
+        <Reveal from="left" className="sx-side">
+          <p className="sx-label">06 — Submit <i /></p>
+          <motion.h2 className="sx-title" initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }}>
+            <span className="hl">
+              <motion.span variants={{ hidden: { y: "110%" }, show: { y: "0%", transition: { duration: 0.9, ease: [0.2, 0.8, 0.2, 1] } } }}>Submit Your</motion.span>
+            </span>
+            <span className="hl">
+              <motion.span className="grad" variants={{ hidden: { y: "110%" }, show: { y: "0%", transition: { delay: 0.1, duration: 0.9, ease: [0.2, 0.8, 0.2, 1] } } }}>
+                Abstract
+              </motion.span>
+            </span>
+            <svg className="sx-swoosh" viewBox="0 0 240 20" aria-hidden="true">
+              <motion.path d="M4 14 C 70 4, 160 4, 236 9" fill="none" stroke="#c9a8ff" strokeWidth="4" strokeLinecap="round" variants={{ hidden: { pathLength: 0 }, show: { pathLength: 1, transition: { delay: 0.6, duration: 0.8 } } }} />
+            </svg>
+          </motion.h2>
+          <p className="sx-lead">Turn your idea into impact. Fill in the form and upload your abstract to participate in Foundation Day.</p>
+          <ul className="sx-list">
             <li>
-              Deadline: <b>{DEADLINE_TEXT}</b>
+              <span className="sx-li-ic"><Icon name="user" size={18} /></span>Individual entry, one presenter
+            </li>
+            <li>
+              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme, any format for the abstract
+            </li>
+            <li>
+              <span className="sx-li-ic"><Icon name="cloudUpload" size={18} /></span>Up to {MAX_FILE_MB} MB per file
+            </li>
+            <li>
+              <span className="sx-li-ic"><Icon name="calendar" size={18} /></span>Deadline: <b className="sx-pill">{DEADLINE_TEXT}</b>
             </li>
           </ul>
-          <div className="side-note">
-            Shortlisted students are told by e-mail, so please check the address you enter.
+          <div className="sx-art" aria-hidden>
+            <SubmitArt />
+          </div>
+          <div className="sx-note">
+            <Icon name="info" size={26} />
+            <span>Shortlisted students are told by e-mail, so please check the address you enter.</span>
           </div>
         </Reveal>
 
         <Reveal from="right">
-          <div className="form-card">
+          <div className="form-card sx-card">
             <AnimatePresence mode="wait">
               {status === "done" ? (
                 <motion.div key="done" className="done" initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>
@@ -178,26 +275,28 @@ export default function SubmitForm() {
                 </motion.div>
               ) : (
                 <motion.form key="form" onSubmit={submit} noValidate initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                  <h3>Your details</h3>
+                  <h3 className="sx-h">
+                    <Icon name="file" size={24} /> Your Details <i />
+                  </h3>
                   <div className="row">
-                    <div className="fld">
+                    <Field icon="user">
                       <label htmlFor="name">Full name *</label>
-                      <input id="name" autoComplete="name" value={v.name} onChange={set("name")} {...aria("name")} />
+                      <input id="name" autoComplete="name" placeholder="Enter your full name" value={v.name} onChange={set("name")} {...aria("name")} />
                       <Err k="name" />
-                    </div>
-                    <div className="fld">
+                    </Field>
+                    <Field icon="idcard">
                       <label htmlFor="regNo">Registration no. *</label>
-                      <input id="regNo" autoCapitalize="characters" value={v.regNo} onChange={set("regNo")} {...aria("regNo")} />
+                      <input id="regNo" autoCapitalize="characters" placeholder="Enter your registration number" value={v.regNo} onChange={set("regNo")} {...aria("regNo")} />
                       <Err k="regNo" />
-                    </div>
+                    </Field>
                   </div>
                   <div className="row">
-                    <div className="fld">
+                    <Field icon="mail">
                       <label htmlFor="email">E-mail *</label>
-                      <input id="email" type="email" autoComplete="email" value={v.email} onChange={set("email")} {...aria("email")} />
+                      <input id="email" type="email" autoComplete="email" placeholder="Enter your e-mail address" value={v.email} onChange={set("email")} {...aria("email")} />
                       <Err k="email" />
-                    </div>
-                    <div className="fld">
+                    </Field>
+                    <Field icon="cap">
                       <label htmlFor="branch">Branch *</label>
                       <select id="branch" value={v.branch} onChange={set("branch")} {...aria("branch")}>
                         <option value="">Select your branch</option>
@@ -206,31 +305,36 @@ export default function SubmitForm() {
                         ))}
                       </select>
                       <Err k="branch" />
-                    </div>
+                    </Field>
                   </div>
-                  <div className="fld">
+                  <Field icon="bulb">
                     <label htmlFor="title">Title of your idea *</label>
-                    <input id="title" value={v.title} onChange={set("title")} {...aria("title")} />
+                    <input id="title" placeholder="Enter a concise title for your idea" value={v.title} onChange={set("title")} {...aria("title")} />
                     <Err k="title" />
-                  </div>
+                  </Field>
 
-                  <div className="fld">
+                  <Field icon="grid">
                     <span className="lbl">Domains (pick any that fit)</span>
                     <div className="tags">
-                      {DOMAINS.map((d) => (
-                        <button type="button" key={d} className={`tag ${domains.includes(d) ? "on" : ""}`} aria-pressed={domains.includes(d)} onClick={() => toggle(d)}>
-                          {d}
-                        </button>
-                      ))}
+                      {DOMAINS.map((d, i) => {
+                        const on = domains.includes(d);
+                        return (
+                          <motion.button type="button" key={d} className={`tag ${on ? "on" : ""}`} aria-pressed={on} onClick={() => toggle(d)} whileTap={{ scale: 0.94 }}>
+                            {on && <Icon name="check" size={14} />}
+                            <Icon name={DOMAIN_ICONS[i] ?? "dots"} size={16} />
+                            {d}
+                          </motion.button>
+                        );
+                      })}
                     </div>
-                  </div>
+                  </Field>
 
-                  <div className="fld">
+                  <Field icon="users">
                     <label htmlFor="collab">People who helped you (optional)</label>
                     <input id="collab" placeholder="Acknowledged only. You are the sole presenter." value={v.collaborators} onChange={set("collaborators")} />
-                  </div>
+                  </Field>
 
-                  <div className="fld">
+                  <Field icon="clip">
                     <span className="lbl">Abstract *</span>
                     <div
                       className={`drop ${drag ? "drag" : ""} ${errors.file ? "bad" : ""}`}
@@ -252,7 +356,7 @@ export default function SubmitForm() {
                         <div className="chip-file">
                           <span className="fi" aria-hidden><Icon name="clip" size={18} /></span>
                           <span className="fn">{file.name}</span>
-                          <span className="fs">{fmt(file.size)}</span>
+                          <span className="fsz">{fmt(file.size)}</span>
                           <button type="button" aria-label="Remove file" onClick={(e) => (e.stopPropagation(), setFile(null), setErrors((s) => ({ ...s, file: undefined })))}>
                             ×
                           </button>
@@ -260,7 +364,7 @@ export default function SubmitForm() {
                       ) : (
                         <>
                           <motion.span className="up" aria-hidden animate={{ y: [0, -6, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
-                            <Icon name="upload" size={26} />
+                            <Icon name="cloudUpload" size={34} />
                           </motion.span>
                           <b>Drop your file here, or click to browse</b>
                           <small>Any format · up to {MAX_FILE_MB} MB</small>
@@ -268,7 +372,7 @@ export default function SubmitForm() {
                       )}
                     </div>
                     <Err k="file" />
-                  </div>
+                  </Field>
 
                   {/* honeypot: real people never see this */}
                   <div className="hp" aria-hidden="true">
@@ -278,21 +382,26 @@ export default function SubmitForm() {
                     </label>
                   </div>
 
-                  <label className="consent">
-                    <input type="checkbox" checked={consent} onChange={(e) => (setConsent(e.target.checked), setErrors((s) => ({ ...s, consent: undefined })))} {...aria("consent")} />
-                    <span>I confirm this is my own idea and that I will be the only presenter.</span>
-                  </label>
-                  <Err k="consent" />
-
                   {serverMsg && (
                     <p className="server-err" role="alert">
                       {serverMsg}
                     </p>
                   )}
 
-                  <motion.button className="btn btn-primary btn-lg full" disabled={status === "sending"} whileHover={{ scale: 1.015 }} whileTap={{ scale: 0.98 }}>
-                    {status === "sending" ? `Uploading… ${progress}%` : "Send my abstract"}
-                  </motion.button>
+                  <div className="sx-bottom">
+                    <div>
+                      <label className="consent">
+                        <input type="checkbox" checked={consent} onChange={(e) => (setConsent(e.target.checked), setErrors((s) => ({ ...s, consent: undefined })))} {...aria("consent")} />
+                        <span>I confirm this is my own idea and that I will be the only presenter. *</span>
+                      </label>
+                      <Err k="consent" />
+                    </div>
+                    <motion.button className="btn btn-primary btn-lg sx-submit" disabled={status === "sending"} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                      <Icon name="send" size={18} />
+                      {status === "sending" ? `Uploading… ${progress}%` : "Submit Abstract"}
+                      {status !== "sending" && <Icon name="arrow" size={18} />}
+                    </motion.button>
+                  </div>
                   {status === "sending" && (
                     <div className="upbar" aria-hidden>
                       <motion.i animate={{ width: `${progress}%` }} />

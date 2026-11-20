@@ -1,6 +1,7 @@
 "use client";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useId } from "react";
 import { DEADLINE_TEXT } from "@/lib/config";
 import Icon from "./Icon";
 import Magnetic from "./Magnetic";
@@ -9,25 +10,26 @@ import Parallax from "./Parallax";
 const ease = [0.2, 0.8, 0.2, 1] as const;
 
 /** Glowing glass bulb with a sprout, on a lit pedestal with an orbit ring. */
-function Bulb() {
+export function Bulb() {
+  const u = useId().replace(/:/g, "");
   return (
     <svg className="bulb" viewBox="0 0 220 300" aria-hidden="true">
       <defs>
-        <radialGradient id="bGlass" cx="45%" cy="38%" r="60%">
+        <radialGradient id={`bGlass${u}`} cx="45%" cy="38%" r="60%">
           <stop offset="0" stopColor="#ffffff" stopOpacity=".35" />
           <stop offset=".55" stopColor="#8f78ff" stopOpacity=".18" />
           <stop offset="1" stopColor="#5b3fd9" stopOpacity=".08" />
         </radialGradient>
-        <linearGradient id="bLeaf" x1="0" y1="1" x2="0" y2="0">
+        <linearGradient id={`bLeaf${u}`} x1="0" y1="1" x2="0" y2="0">
           <stop offset="0" stopColor="#7cf7e1" />
           <stop offset="1" stopColor="#e9fffb" />
         </linearGradient>
-        <linearGradient id="bRing" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient id={`bRing${u}`} x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#7b5cff" />
           <stop offset=".5" stopColor="#d7a6ff" />
           <stop offset="1" stopColor="#7b5cff" />
         </linearGradient>
-        <filter id="bGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <filter id={`bGlow${u}`} x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="6" result="b" />
           <feMerge>
             <feMergeNode in="b" />
@@ -39,18 +41,18 @@ function Bulb() {
       {/* pedestal */}
       <ellipse cx="110" cy="268" rx="80" ry="18" fill="#1d1640" />
       <ellipse cx="110" cy="258" rx="80" ry="18" fill="#2a2160" />
-      <ellipse cx="110" cy="256" rx="62" ry="12" fill="none" stroke="url(#bRing)" strokeWidth="3" filter="url(#bGlow)" />
+      <ellipse cx="110" cy="256" rx="62" ry="12" fill="none" stroke={`url(#bRing${u})`} strokeWidth="3" filter={`url(#bGlow${u})`} />
 
       <g className="bulb-float">
         {/* orbit ring behind */}
-        <ellipse className="bulb-orbit" cx="110" cy="118" rx="104" ry="34" fill="none" stroke="url(#bRing)" strokeWidth="2.5" strokeDasharray="160 90" transform="rotate(-14 110 118)" filter="url(#bGlow)" opacity=".9" />
+        <ellipse className="bulb-orbit" cx="110" cy="118" rx="104" ry="34" fill="none" stroke={`url(#bRing${u})`} strokeWidth="2.5" strokeDasharray="160 90" transform="rotate(-14 110 118)" filter={`url(#bGlow${u})`} opacity=".9" />
         {/* glass */}
-        <path d="M110 30c-36 0-62 27-62 61 0 22 11 37 23 50 8 9 12 18 12 28v9h54v-9c0-10 4-19 12-28 12-13 23-28 23-50 0-34-26-61-62-61z" fill="url(#bGlass)" stroke="#b9a6ff" strokeWidth="2.5" filter="url(#bGlow)" />
+        <path d="M110 30c-36 0-62 27-62 61 0 22 11 37 23 50 8 9 12 18 12 28v9h54v-9c0-10 4-19 12-28 12-13 23-28 23-50 0-34-26-61-62-61z" fill={`url(#bGlass${u})`} stroke="#b9a6ff" strokeWidth="2.5" filter={`url(#bGlow${u})`} />
         <path d="M78 64c8-12 20-18 32-19" stroke="#fff" strokeOpacity=".7" strokeWidth="4" strokeLinecap="round" fill="none" />
         {/* sprout */}
-        <path d="M110 172v-60" stroke="#9ff5e6" strokeWidth="3" strokeLinecap="round" filter="url(#bGlow)" />
-        <path d="M110 128c-4-20-22-30-40-26 4 18 20 30 40 26z" fill="url(#bLeaf)" filter="url(#bGlow)" />
-        <path d="M110 118c4-22 24-32 42-28-4 20-22 32-42 28z" fill="url(#bLeaf)" filter="url(#bGlow)" />
+        <path d="M110 172v-60" stroke="#9ff5e6" strokeWidth="3" strokeLinecap="round" filter={`url(#bGlow${u})`} />
+        <path d="M110 128c-4-20-22-30-40-26 4 18 20 30 40 26z" fill={`url(#bLeaf${u})`} filter={`url(#bGlow${u})`} />
+        <path d="M110 118c4-22 24-32 42-28-4 20-22 32-42 28z" fill={`url(#bLeaf${u})`} filter={`url(#bGlow${u})`} />
         {/* base */}
         <rect x="84" y="178" width="52" height="11" rx="5" fill="#c4b6ff" />
         <rect x="87" y="192" width="46" height="10" rx="5" fill="#9e8cf0" />
