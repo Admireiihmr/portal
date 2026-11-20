@@ -3,6 +3,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import { STEPS } from "@/lib/content";
 import { Trophy } from "./Awards";
 import Icon from "./Icon";
+import Parallax from "./Parallax";
+import Tilt from "./Tilt";
 
 const ease = [0.2, 0.8, 0.2, 1] as const;
 
@@ -158,6 +160,7 @@ export default function Steps() {
           </div>
 
           <motion.div className="st-hero-art" initial={{ opacity: 0, scale: reduce ? 1 : 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={inView} transition={{ duration: 0.9, ease }} aria-hidden>
+            <Parallax y={26} rotate={3}>
             <svg viewBox="0 0 320 200">
               <ellipse cx="185" cy="170" rx="110" ry="22" fill="url(#sV)" />
               <ellipse cx="185" cy="162" rx="110" ry="22" fill="#4a33b2" />
@@ -184,6 +187,7 @@ export default function Steps() {
                 <rect x="166" y="122" width="38" height="22" rx="6" fill="url(#sV)" />
               </g>
             </svg>
+            </Parallax>
           </motion.div>
         </div>
 
@@ -203,7 +207,8 @@ export default function Steps() {
           </svg>
 
           {STEPS.map((s, i) => (
-            <motion.article
+            <Tilt
+              as="article"
               key={s.t}
               className="st-card"
               initial={{ opacity: 0, y: reduce ? 0 : 30 }}
@@ -234,11 +239,11 @@ export default function Steps() {
               <h3>{s.t}</h3>
               <p>{s.d}</p>
               {i % 4 !== 3 && (
-                <span className="st-next" aria-hidden>
+                <motion.span className="st-next" aria-hidden animate={reduce ? undefined : { x: [0, 4, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}>
                   <Icon name="chevron" size={18} />
-                </span>
+                </motion.span>
               )}
-            </motion.article>
+            </Tilt>
           ))}
         </div>
       </div>

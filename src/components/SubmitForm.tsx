@@ -290,9 +290,9 @@ export default function SubmitForm() {
                     </p>
                   )}
 
-                  <button className="btn btn-primary btn-lg full" disabled={status === "sending"}>
+                  <motion.button className="btn btn-primary btn-lg full" disabled={status === "sending"} whileHover={{ scale: 1.015 }} whileTap={{ scale: 0.98 }}>
                     {status === "sending" ? `Uploading… ${progress}%` : "Send my abstract"}
-                  </button>
+                  </motion.button>
                   {status === "sending" && (
                     <div className="upbar" aria-hidden>
                       <motion.i animate={{ width: `${progress}%` }} />

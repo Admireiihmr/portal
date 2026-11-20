@@ -1,5 +1,6 @@
 import { DEADLINE_TEXT } from "@/lib/config";
 import Icon from "./Icon";
+import Magnetic from "./Magnetic";
 import Reveal from "./Reveal";
 
 export default function FinalCta() {
@@ -14,9 +15,11 @@ export default function FinalCta() {
               <p>Submit your abstract in a couple of minutes. Deadline: {DEADLINE_TEXT}.</p>
             </div>
             <div className="final-actions">
-              <a href="#submit" className="btn btn-primary btn-lg">
-                Submit your abstract <Icon name="arrow" size={18} />
-              </a>
+              <Magnetic>
+                <a href="#submit" className="btn btn-primary btn-lg">
+                  Submit your abstract <Icon name="arrow" size={18} />
+                </a>
+              </Magnetic>
               <a href="mailto:admire@iihmrbangalore.edu.in" className="final-mail">
                 <Icon name="mail" size={18} /> admire@iihmrbangalore.edu.in
               </a>

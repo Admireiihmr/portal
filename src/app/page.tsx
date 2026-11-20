@@ -15,6 +15,7 @@ import Steps from "@/components/Steps";
 import SplitHeading from "@/components/SplitHeading";
 import SubmitForm from "@/components/SubmitForm";
 import Ticker from "@/components/Ticker";
+import Tilt from "@/components/Tilt";
 import ZoomBand from "@/components/ZoomBand";
 import { STATS, TICKER_A, TICKER_B } from "@/lib/content";
 
@@ -49,12 +50,12 @@ export default function Home() {
             <dl className="stats">
               {STATS.map((s, i) => (
                 <Reveal key={s.label} delay={i * 0.06}>
-                  <div className="stat">
+                  <Tilt className="stat" max={6} lift={1.03}>
                     <dd>
                       <CountUp to={s.to} suffix={s.suffix} />
                     </dd>
                     <dt>{s.label}</dt>
-                  </div>
+                  </Tilt>
                 </Reveal>
               ))}
             </dl>

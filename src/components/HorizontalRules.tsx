@@ -6,6 +6,7 @@ import { RULES } from "@/lib/content";
 import { useStickyProgress } from "@/lib/useStickyProgress";
 import Icon from "./Icon";
 import SplitHeading from "./SplitHeading";
+import Tilt from "./Tilt";
 
 const N = RULES.length;
 // one photo per rule, in order (a changed photo needs a new filename: Next caches optimised copies by name)
@@ -16,7 +17,7 @@ const FOCUS = ["50% 50%", "50% 40%", "70% 30%", "50% 50%", "50% 40%", "50% 50%"]
 function RuleCard({ i }: { i: number }) {
   const r = RULES[i];
   return (
-    <article className="rcard">
+    <Tilt as="article" className="rcard" max={5} lift={1.015}>
       <div className="rcard-photo">
         <Image src={`/images/rules/${PHOTOS[i]}`} alt="" fill sizes="(max-width: 900px) 80vw, 420px" style={{ objectFit: "cover", objectPosition: FOCUS[i] }} />
       </div>
@@ -30,7 +31,7 @@ function RuleCard({ i }: { i: number }) {
         <h3>{r.title}</h3>
         <p>{r.text}</p>
       </div>
-    </article>
+    </Tilt>
   );
 }
 

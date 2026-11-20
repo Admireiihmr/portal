@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { FUNNEL } from "@/lib/content";
 import { Trophy } from "./Awards";
 import Icon from "./Icon";
+import Tilt from "./Tilt";
 
 const ease = [0.2, 0.8, 0.2, 1] as const;
 
@@ -127,6 +128,7 @@ export default function Funnel() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={inView}
                   transition={{ duration: 0.7, delay: i * 0.13, ease }}
+                  whileHover={reduce ? undefined : { scale: 1.045, transition: { type: "spring", stiffness: 300, damping: 18 } }}
                 >
                   <span className="fl-rim" />
                   <span className="fl-face" />
@@ -191,7 +193,7 @@ export default function Funnel() {
                   <span className="fs-node">
                     <Icon name={NODE_ICONS[i]} size={22} />
                   </span>
-                  <div className="fs-card">
+                  <Tilt className="fs-card" max={5} lift={1.02}>
                     <div className="fs-ct">
                       <span className="fs-badge">Stage {i + 1}</span>
                       <h3>{f.title}</h3>
@@ -200,7 +202,7 @@ export default function Funnel() {
                     <span className="fs-art">
                       <Art />
                     </span>
-                  </div>
+                  </Tilt>
                 </motion.div>
               );
             })}

@@ -609,3 +609,11 @@ img { display: block; max-width: 100%; }
   .zoomband { height: auto; }
   .zb-stick { position: relative; height: 70vh; }
 }
+
+/* ───────── interactive cards (Tilt) ───────── */
+.tilt-card { position: relative; transform-style: preserve-3d; will-change: transform; }
+.tilt-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.55), transparent 60%); mix-blend-mode: soft-light; }
+.tilt-card:hover::after { opacity: 1; }
+.rcard.tilt-card::after, .stat.tilt-card::after { background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(107, 87, 199, 0.12), transparent 60%); mix-blend-mode: normal; }
+.aw-stage-wrap { width: 100%; }
+.fact-ic { cursor: default; }

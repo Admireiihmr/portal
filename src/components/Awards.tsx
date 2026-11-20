@@ -2,6 +2,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useId } from "react";
 import Icon from "./Icon";
+import Parallax from "./Parallax";
+import Tilt from "./Tilt";
 
 const ease = [0.2, 0.8, 0.2, 1] as const;
 
@@ -125,7 +127,7 @@ export default function Awards() {
           </motion.p>
           <ul className="aw-cards">
             {CARDS.map((c, i) => (
-              <motion.li key={c.title} initial={{ opacity: 0, x: reduce ? 0 : -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={inView} transition={{ delay: 0.25 + i * 0.1, duration: 0.7, ease }}>
+              <Tilt as="li" max={5} lift={1.02} key={c.title} initial={{ opacity: 0, x: reduce ? 0 : -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={inView} transition={{ delay: 0.25 + i * 0.1, duration: 0.7, ease }}>
                 <span className="aw-ic">
                   <Icon name={c.icon} size={24} />
                 </span>
@@ -134,11 +136,12 @@ export default function Awards() {
                   <span>{c.text}</span>
                 </span>
                 <Icon name="chevron" size={18} className="aw-chev" />
-              </motion.li>
+              </Tilt>
             ))}
           </ul>
         </div>
 
+        <Parallax y={30} className="aw-stage-wrap">
         <div className="aw-stage" aria-label="Podium: first, second and third place">
           <span className="aw-dome" aria-hidden />
           <svg className="aw-orbit back" viewBox="0 0 600 300" aria-hidden="true">
@@ -161,7 +164,8 @@ export default function Awards() {
           <div className="aw-pods">
             {PODS.map((p) => (
               <div className={`aw-pod ${p.cls}`} key={p.n}>
-                <motion.div className="aw-trophy" initial={{ opacity: 0, y: reduce ? 0 : -40 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView} transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.5 + p.d }}>
+                <motion.div className="aw-trophy" initial={{ opacity: 0, y: reduce ? 0 : -40 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView} transition={{ type: "spring", stiffness: 120, damping: 12, delay: 0.5 + p.d }}
+                  whileHover={reduce ? undefined : { y: -12, rotate: [0, -8, 8, -4, 0], transition: { duration: 0.6 } }}>
                   <Trophy tone={p.tone} />
                 </motion.div>
                 <motion.div className="aw-block" initial={{ scaleY: reduce ? 1 : 0.2, opacity: 0 }} whileInView={{ scaleY: 1, opacity: 1 }} viewport={inView} transition={{ duration: 0.9, delay: p.d, ease }}>
@@ -175,6 +179,7 @@ export default function Awards() {
             <path d="M10 150 A 290 70 0 0 0 590 150" fill="none" stroke="url(#awOrb)" strokeWidth="3" strokeDasharray="420 900" className="aw-orbit-run" />
           </svg>
         </div>
+        </Parallax>
       </div>
     </section>
   );

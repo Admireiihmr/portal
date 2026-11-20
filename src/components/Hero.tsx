@@ -4,6 +4,7 @@ import Image from "next/image";
 import { DEADLINE_TEXT } from "@/lib/config";
 import Icon from "./Icon";
 import Magnetic from "./Magnetic";
+import Parallax from "./Parallax";
 
 const ease = [0.2, 0.8, 0.2, 1] as const;
 
@@ -128,7 +129,9 @@ export default function Hero() {
 
       <div className="hero-in">
         <motion.div className="hero-bulb" initial={{ opacity: 0, scale: reduce ? 1 : 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, ease }}>
-          <Bulb />
+          <Parallax y={-36}>
+            <Bulb />
+          </Parallax>
         </motion.div>
 
         <div className="hero-copy">
@@ -182,27 +185,27 @@ export default function Hero() {
           </motion.div>
           <motion.dl className="hero-facts" {...rise(0.55)}>
             <div>
-              <span className="fact-ic">
+              <motion.span className="fact-ic" whileHover={reduce ? undefined : { rotate: [0, -12, 12, 0], scale: 1.12 }} transition={{ duration: 0.5 }}>
                 <Icon name="users" size={20} />
-              </span>
+              </motion.span>
               <span>
                 <dt>Finalists</dt>
                 <dd>15</dd>
               </span>
             </div>
             <div>
-              <span className="fact-ic">
+              <motion.span className="fact-ic" whileHover={reduce ? undefined : { rotate: [0, -12, 12, 0], scale: 1.12 }} transition={{ duration: 0.5 }}>
                 <Icon name="trophy" size={20} />
-              </span>
+              </motion.span>
               <span>
                 <dt>Awards</dt>
                 <dd>6</dd>
               </span>
             </div>
             <div>
-              <span className="fact-ic">
+              <motion.span className="fact-ic" whileHover={reduce ? undefined : { rotate: [0, -12, 12, 0], scale: 1.12 }} transition={{ duration: 0.5 }}>
                 <Icon name="calendar" size={20} />
-              </span>
+              </motion.span>
               <span>
                 <dt>Deadline</dt>
                 <dd className="sm">{DEADLINE_TEXT}</dd>
