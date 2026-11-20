@@ -16,7 +16,6 @@ import SplitHeading from "@/components/SplitHeading";
 import SubmitForm from "@/components/SubmitForm";
 import Ticker from "@/components/Ticker";
 import Tilt from "@/components/Tilt";
-import ZoomBand from "@/components/ZoomBand";
 import { STATS, TICKER_A, TICKER_B } from "@/lib/content";
 
 export default function Home() {
@@ -65,7 +64,6 @@ export default function Home() {
         <HorizontalRules />
         <Steps />
         <Funnel />
-        <ZoomBand />
         <Awards />
         <SubmitForm />
         <Faq />

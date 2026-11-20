@@ -376,15 +376,6 @@ img { display: block; max-width: 100%; }
   .fs-line { width: 50px; }
 }
 
-/* ───────── zoom band ───────── */
-.zoomband { position: relative; height: 220vh; margin-top: 0; }
-.zb-stick { position: sticky; top: 0; height: 100vh; overflow: hidden; display: grid; place-items: center; }
-.zb-media { position: absolute; inset: 0; overflow: hidden; will-change: transform; background: var(--dark); }
-.zb-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18, 15, 36, 0.35), rgba(18, 15, 36, 0.85)); }
-.zb-text { position: relative; z-index: 2; color: #fff; text-align: center; padding: 0 var(--gutter); max-width: 900px; }
-.zb-text h2 { font-size: clamp(2.2rem, 5.4vw, 4.4rem); margin: 4px 0 18px; }
-.zb-text p:last-child { color: rgba(255, 255, 255, 0.75); max-width: 56ch; margin: 0 auto; font-size: 1.05rem; }
-
 /* ───────── awards ───────── */
 .aw { position: relative; overflow: hidden; margin-top: 0; padding: clamp(80px, 9vw, 120px) 0; background: linear-gradient(135deg, #f4f0ff 0%, #ece6ff 55%, #f6f2ff 100%); }
 .aw-ribbon { position: absolute; pointer-events: none; border-radius: 50%; }
@@ -577,8 +568,6 @@ img { display: block; max-width: 100%; }
   .fn-text { border-left: 0; padding: 0; }
   .fn-layer { height: 76px; }
   .podium { height: 320px; }
-  .zoomband { height: auto; }
-  .zb-stick { position: relative; height: 72vh; min-height: 460px; }
   .footer-grid { gap: 28px; }
   .mcta {
     display: flex; position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 58;
@@ -606,8 +595,6 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   .sw > span { transform: none !important; }
-  .zoomband { height: auto; }
-  .zb-stick { position: relative; height: 70vh; }
 }
 
 /* ───────── interactive cards (Tilt) ───────── */
