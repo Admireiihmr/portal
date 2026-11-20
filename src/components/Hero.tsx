@@ -79,7 +79,7 @@ export default function Hero() {
           transition={{ duration: 0.9, ease }}
         >
           <motion.div className="hero-img" style={zoom ? { scale: imgScale } : undefined}>
-            <Image src="/images/iihmr-building.jpg" alt="The IIHMR Bangalore building" fill priority quality={90} sizes="(max-width: 900px) 100vw, 60vw" style={{ objectFit: "cover", objectPosition: "42% 55%" }} />
+            <Image src="/images/iihmr-campus-facade.jpg" alt="The IIHMR Bangalore campus building" fill priority quality={90} sizes="(max-width: 900px) 100vw, 60vw" style={{ objectFit: "cover", objectPosition: "38% 60%" }} />
           </motion.div>
           {zoom && <motion.div className="hero-shade" style={{ opacity: shadeO }} />}
           <span className="hero-caption">
