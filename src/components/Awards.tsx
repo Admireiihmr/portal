@@ -12,7 +12,7 @@ const TONES = {
 } as const;
 
 /** Glossy cup with a star, in gold / silver / bronze. */
-function Trophy({ tone }: { tone: keyof typeof TONES }) {
+export function Trophy({ tone }: { tone: keyof typeof TONES }) {
   const id = useId().replace(/:/g, "");
   const [hi, mid, low, dark] = TONES[tone];
   return (
@@ -48,7 +48,7 @@ function Trophy({ tone }: { tone: keyof typeof TONES }) {
 }
 
 /** Number inside a laurel wreath: leaves laid along an arc on each side. */
-function Laurel({ n, color }: { n: number; color: string }) {
+export function Laurel({ n, color }: { n: number; color: string }) {
   const cx = 60;
   const cy = 50;
   const r = 34;
