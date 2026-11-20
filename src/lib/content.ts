@@ -39,26 +39,14 @@ export const RULES = [
 ];
 
 export const STEPS = [
-  { t: "Read the guidelines", d: "Know the rules: individual entry, one presenter, domain tags and the abstract format." },
-  { t: "Submit your abstract", d: "Fill in your details and upload your abstract on this page. It takes a couple of minutes." },
-  { t: "Submissions close", d: "After about a week the portal closes and every idea is grouped by domain." },
-  { t: "Expert review", d: "Domain experts read each abstract and pick the strongest five or six in their area." },
-  { t: "Shortlist of 15", d: "From the experts' picks, 15 students are selected to present on Foundation Day." },
-  { t: "Acceptance mail", d: "Selected students get a congratulation e-mail with the presentation template." },
-  { t: "Prepare your pitch", d: "Build a poster or an animated video with a short story: the problem, your idea and its impact." },
-  { t: "Foundation Day", d: "Present for about four minutes, meet the judges and compete for the awards." },
-];
-
-// one photo per step above, same order (a changed photo needs a new filename: Next caches optimised copies by name)
-export const STEP_IMAGES = [
-  "step-guidelines.jpg",
-  "step-submit.jpg",
-  "step-deadline.jpg",
-  "step-review.jpg",
-  "step-shortlist-standout.jpg",
-  "step-mail.jpg",
-  "step-pitch.jpg",
-  "step-foundation-day.jpg",
+  { t: "Have an Idea", d: "Identify a relevant healthcare challenge and a creative solution." },
+  { t: "Submit Your Abstract", d: "Fill in your details and upload your abstract." },
+  { t: "Initial Screening", d: "Submissions are checked for completeness and eligibility." },
+  { t: "Expert Review", d: "Domain experts evaluate each abstract and select the best ideas." },
+  { t: "Shortlist of 15", d: "The top 15 ideas are selected to present on Foundation Day." },
+  { t: "Prepare Your Pitch", d: "Create a 4-minute presentation with your problem, idea and impact." },
+  { t: "Present on Foundation Day", d: "The 15 shortlisted students present their ideas to the expert panel." },
+  { t: "Awards & Recognition", d: "Three winners and three consolation awards are announced, with certificates for all presenters." },
 ];
 
 export const FUNNEL = [

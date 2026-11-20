@@ -11,7 +11,7 @@ import Navbar from "@/components/Navbar";
 import PhotoTicker from "@/components/PhotoTicker";
 import Reveal from "@/components/Reveal";
 import SideNav from "@/components/SideNav";
-import Spiral from "@/components/Spiral";
+import Steps from "@/components/Steps";
 import SplitHeading from "@/components/SplitHeading";
 import SubmitForm from "@/components/SubmitForm";
 import Ticker from "@/components/Ticker";
@@ -62,7 +62,7 @@ export default function Home() {
         </section>
 
         <HorizontalRules />
-        <Spiral />
+        <Steps />
         <Funnel />
         <ZoomBand />
         <Awards />
