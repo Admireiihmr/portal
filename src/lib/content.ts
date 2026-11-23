@@ -64,3 +64,65 @@ export const FAQ = [
   { q: "How will I know if I am shortlisted?", a: "We will e-mail the address you give in the form, so please double-check it." },
   { q: "Can I submit again if I made a mistake?", a: "Yes. Submit again with the same registration number and your files are kept together in your folder. The organisers will use the latest one." },
 ];
+
+// Detailed guidelines shown before the rule cards. {deadline} and {maxMb} are filled in from config.
+export const GUIDELINES: { icon: string; title: string; points: string[] }[] = [
+  {
+    icon: "cap",
+    title: "Eligibility",
+    points: [
+      "Open to current IIHMR Bangalore students only. The event is not open to external participants.",
+      "First- and second-year students compete together on equal terms.",
+      "Students from every PGDM programme can take part. There are no branch-wise categories.",
+    ],
+  },
+  {
+    icon: "user",
+    title: "Entry format",
+    points: [
+      "This is an individual entry: one student, one idea, one presenter.",
+      "Team entries are not accepted. Only the student who submits will present.",
+      "You may list your contributors in the form. They are acknowledged, but the certificate carries only the presenter's name.",
+    ],
+  },
+  {
+    icon: "bulb",
+    title: "Your idea",
+    points: [
+      "There is no fixed theme. Any idea that can improve health, care, hospitals, pharma or health-tech is welcome.",
+      "Cross-cutting ideas, such as AI in pharma or digital tools for hospital operations, are encouraged.",
+      "The idea must be your own original work.",
+    ],
+  },
+  {
+    icon: "file",
+    title: "Writing your abstract",
+    points: [
+      "Describe the problem you are solving and who it affects.",
+      "Explain your idea, how it works and the impact you expect.",
+      "Keep it short: a page or two is enough. Give your idea a clear, concise title.",
+    ],
+  },
+  {
+    icon: "cloudUpload",
+    title: "Submitting online",
+    points: [
+      "Fill in your full name, registration number, e-mail, branch and idea title, then upload your abstract.",
+      "Any common format works: PDF, Word, PowerPoint, images, text or video. Executable files (such as .exe) are blocked. Maximum file size: {maxMb} MB.",
+      "Tick the confirmation that the idea is your own and that you will be the only presenter.",
+      "Note the reference number shown after you submit. Made a mistake? Submit again with the same registration number; the latest version is used.",
+      "Deadline: {deadline}.",
+    ],
+  },
+  {
+    icon: "trophy",
+    title: "Selection & presentation",
+    points: [
+      "Every submission is checked for completeness and eligibility, then reviewed by domain experts.",
+      "The top 15 ideas are shortlisted. Shortlisted students are told by e-mail, so double-check your address.",
+      "Shortlisted students receive a uniform template and present with a poster or an animated video, plus a demo link if you built something.",
+      "Each finalist gets 4 minutes on stage to pitch to the expert panel on Foundation Day.",
+      "Three winners and three consolation awards are announced, and every presenter receives a certificate.",
+    ],
+  },
+];
