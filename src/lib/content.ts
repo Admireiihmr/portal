@@ -29,15 +29,6 @@ export const STATS = [
   { to: 7, suffix: " days", label: "submission window" },
 ];
 
-export const RULES = [
-  { icon: "bulb", title: "Any theme, any idea", text: "There is no fixed theme. If it can improve health, care, pharma or health-tech, it belongs here." },
-  { icon: "cap", title: "IIHMR students only", text: "Open to our own students. First- and second-year students compete together on equal terms." },
-  { icon: "user", title: "Individual entry", text: "One student, one idea, one presenter. You may list your contributors; they are acknowledged, and the certificate carries the presenter's name." },
-  { icon: "tag", title: "One open category", text: "No branch-wise categories. Ideas from every programme are judged together, on their merit." },
-  { icon: "file", title: "Abstract first", text: "Upload your abstract in any common format. Experts review them and shortlist the best." },
-  { icon: "video", title: "Poster or video", text: "Shortlisted students receive a uniform template and present with a poster or an animated video, with a demo link if you built something." },
-];
-
 export const STEPS = [
   { t: "Have an Idea", d: "Identify a relevant healthcare challenge and a creative solution." },
   { t: "Submit Your Abstract", d: "Fill in your details and upload your abstract." },
@@ -65,7 +56,7 @@ export const FAQ = [
   { q: "Can I submit again if I made a mistake?", a: "Yes. Submit again with the same registration number and your files are kept together in your folder. The organisers will use the latest one." },
 ];
 
-// Detailed guidelines shown before the rule cards. {deadline} and {maxMb} are filled in from config.
+// Detailed guidelines (section 02). {deadline} and {maxMb} are filled in from config.
 export const GUIDELINES: { icon: string; title: string; points: string[] }[] = [
   {
     icon: "cap",

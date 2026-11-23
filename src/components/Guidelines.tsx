@@ -7,17 +7,17 @@ import Icon from "./Icon";
 const ease = [0.2, 0.8, 0.2, 1] as const;
 const fill = (s: string) => s.replace("{deadline}", DEADLINE_TEXT).replace("{maxMb}", String(MAX_FILE_MB));
 
-/** Detailed submission guidelines, grouped into six sections, shown just before the rule cards. */
+/** Detailed submission guidelines, grouped into six sections, section 02. */
 export default function Guidelines() {
   const reduce = useReducedMotion();
   const inView = { once: true, margin: "-60px" } as const;
   return (
-    <section id="guidelines" className="gl" aria-labelledby="gl-title">
+    <section id="rules" className="gl" aria-labelledby="gl-title">
       <div className="wrap">
         <motion.div className="gl-card" initial={{ opacity: 0, y: reduce ? 0 : 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView} transition={{ duration: 0.7, ease }}>
           <div className="gl-head">
             <span className="gl-badge">
-              <Icon name="info" size={16} /> Guidelines
+              <Icon name="info" size={16} /> 02 — Guidelines
             </span>
             <h2 id="gl-title">Detailed guidelines before you submit</h2>
             <p>Please read these carefully. They cover who can take part, what to write, how to submit and what happens next.</p>

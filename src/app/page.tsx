@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import Funnel from "@/components/Funnel";
 import Hero from "@/components/Hero";
 import Guidelines from "@/components/Guidelines";
-import HorizontalRules from "@/components/HorizontalRules";
 import MobileCta from "@/components/MobileCta";
 import Navbar from "@/components/Navbar";
 import PhotoTicker from "@/components/PhotoTicker";
@@ -63,7 +62,6 @@ export default function Home() {
         </section>
 
         <Guidelines />
-        <HorizontalRules />
         <Steps />
         <Funnel />
         <Awards />
