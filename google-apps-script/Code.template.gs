@@ -6,7 +6,7 @@
  *
  * For every submission it creates (or reuses) one sub-folder per student inside FOLDER_ID and saves
  *   - the uploaded abstract
- *   - a details text file (name, registration no., e-mail, branch, title, domains)
+ *   - a details text file (name, registration no., e-mail, branch, title, contributors)
  */
 
 // The Drive folder that receives one sub-folder per student

@@ -1,7 +1,7 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState, type DragEvent, type FormEvent, type ReactNode } from "react";
-import { BRANCHES, DEADLINE_TEXT, DOMAINS, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
+import { BRANCHES, DEADLINE_TEXT, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
 import { normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
@@ -26,9 +26,6 @@ function Confetti() {
     </div>
   );
 }
-
-// icon for each domain chip, in the same order as DOMAINS in config.ts
-const DOMAIN_ICONS = ["heart", "monitor", "building", "pill", "users", "code", "monitor", "coins", "user", "dots"];
 
 /** Label row with an icon in the left gutter. Defined outside the form so inputs keep focus while typing. */
 function Field({ icon, children }: { icon: string; children: ReactNode }) {
@@ -100,7 +97,6 @@ function SubmitArt() {
 
 export default function SubmitForm() {
   const [v, setV] = useState({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", website: "" });
-  const [domains, setDomains] = useState<string[]>([]);
   const [consent, setConsent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -115,7 +111,6 @@ export default function SubmitForm() {
     setV((s) => ({ ...s, [k]: e.target.value }));
     if (errors[k as keyof FieldErrors]) setErrors((s) => ({ ...s, [k]: undefined }));
   };
-  const toggle = (d: string) => setDomains((s) => (s.includes(d) ? s.filter((x) => x !== d) : s.length < 6 ? [...s, d] : s));
   const pick = (f: File | null | undefined) => {
     if (!f) return;
     setFile(f);
@@ -130,7 +125,7 @@ export default function SubmitForm() {
   function submit(e: FormEvent) {
     e.preventDefault();
     setServerMsg("");
-    const fields = normalise({ ...v, domains, consent });
+    const fields = normalise({ ...v, consent });
     const errs = validateFields(fields);
     const fe = validateFile(file);
     if (fe) errs.file = fe;
@@ -147,7 +142,6 @@ export default function SubmitForm() {
     fd.set("email", fields.email);
     fd.set("branch", fields.branch);
     fd.set("title", fields.title);
-    fd.set("domains", fields.domains.join("|"));
     fd.set("collaborators", fields.collaborators);
     fd.set("consent", "on");
     fd.set("website", v.website);
@@ -184,7 +178,6 @@ export default function SubmitForm() {
 
   function reset() {
     setV({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", website: "" });
-    setDomains([]);
     setConsent(false);
     setFile(null);
     setErrors({});
@@ -313,25 +306,9 @@ export default function SubmitForm() {
                     <Err k="title" />
                   </Field>
 
-                  <Field icon="grid">
-                    <span className="lbl">Domains (pick any that fit)</span>
-                    <div className="tags">
-                      {DOMAINS.map((d, i) => {
-                        const on = domains.includes(d);
-                        return (
-                          <motion.button type="button" key={d} className={`tag ${on ? "on" : ""}`} aria-pressed={on} onClick={() => toggle(d)} whileTap={{ scale: 0.94 }}>
-                            {on && <Icon name="check" size={14} />}
-                            <Icon name={DOMAIN_ICONS[i] ?? "dots"} size={16} />
-                            {d}
-                          </motion.button>
-                        );
-                      })}
-                    </div>
-                  </Field>
-
                   <Field icon="users">
-                    <label htmlFor="collab">People who helped you (optional)</label>
-                    <input id="collab" placeholder="Acknowledged only. You are the sole presenter." value={v.collaborators} onChange={set("collaborators")} />
+                    <label htmlFor="collab">Contributors (optional)</label>
+                    <input id="collab" placeholder="Enter contributor names, if any" value={v.collaborators} onChange={set("collaborators")} />
                   </Field>
 
                   <Field icon="clip">

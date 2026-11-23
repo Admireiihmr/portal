@@ -7,7 +7,7 @@ import Parallax from "./Parallax";
 
 const ease = [0.2, 0.8, 0.2, 1] as const;
 // icon for each question, in the same order as FAQ in content.ts
-const FAQ_ICONS = ["user", "users", "file", "cloudUpload", "layers", "trophy", "refresh"];
+const FAQ_ICONS = ["user", "users", "file", "cloudUpload", "trophy", "refresh"];
 
 /** Glass sphere with a big question mark on a lit pedestal, chat and idea bubbles, and a checklist card. */
 function QuestionArt() {

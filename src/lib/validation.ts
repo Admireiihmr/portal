@@ -1,4 +1,4 @@
-import { BLOCKED_EXTENSIONS, BRANCHES, DOMAINS, MAX_FILE_MB } from "./config";
+import { BLOCKED_EXTENSIONS, BRANCHES, MAX_FILE_MB } from "./config";
 
 export type Fields = {
   name: string;
@@ -6,7 +6,6 @@ export type Fields = {
   email: string;
   branch: string;
   title: string;
-  domains: string[];
   collaborators: string;
   consent: boolean;
 };
@@ -50,20 +49,15 @@ export function normalise(raw: {
   email?: unknown;
   branch?: unknown;
   title?: unknown;
-  domains?: unknown;
   collaborators?: unknown;
   consent?: unknown;
 }): Fields {
-  const domains = Array.isArray(raw.domains)
-    ? (raw.domains as unknown[]).map((d) => clean(d, 60))
-    : clean(raw.domains, 400).split("|").map((d) => d.trim());
   return {
     name: clean(raw.name, 80),
     regNo: clean(raw.regNo, 24).toUpperCase(),
     email: clean(raw.email, 120).toLowerCase(),
     branch: clean(raw.branch, 80),
     title: clean(raw.title, 150),
-    domains: domains.filter((d) => (DOMAINS as readonly string[]).includes(d)).slice(0, 6),
     collaborators: clean(raw.collaborators, 200),
     consent: raw.consent === true || raw.consent === "on" || raw.consent === "true",
   };
@@ -76,7 +70,6 @@ export function parseAndValidate(fd: FormData): { fields: Fields; file: File | n
     email: fd.get("email"),
     branch: fd.get("branch"),
     title: fd.get("title"),
-    domains: fd.get("domains"),
     collaborators: fd.get("collaborators"),
     consent: fd.get("consent"),
   });

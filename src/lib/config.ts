@@ -9,20 +9,6 @@ export const BRANCHES = [
   "PGDM – Hospital & Health Management",
   "PGDM – Artificial Intelligence & Data Science",
   "PGDM – Pharmaceutical Management",
-  "Other",
-] as const;
-
-export const DOMAINS = [
-  "AI in healthcare",
-  "Digital health",
-  "Hospital operations",
-  "Pharma & life sciences",
-  "Public health",
-  "Health IT",
-  "Medical devices",
-  "Health policy & finance",
-  "Patient experience",
-  "Something else",
 ] as const;
 
 // Vercel's serverless functions accept ~4.5 MB per request, so default to 4 MB there and 25 MB elsewhere.

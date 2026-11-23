@@ -6,7 +6,7 @@ Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit 
 <your Drive folder>/
   IIH2401_Asha Rao/
     20261119-1028_My Abstract final.pdf      ← the uploaded abstract
-    20261119-1028_details.txt                ← name, reg no., e-mail, branch, title, domains
+    20261119-1028_details.txt                ← name, reg no., e-mail, branch, title, contributors
   IIH2402_Meera Nair/
     ...
 ```
@@ -60,7 +60,7 @@ A website cannot write into a Drive folder just because it has the folder link, 
 | `NEXT_PUBLIC_MAX_FILE_MB` | Max abstract size (default 25) |
 | `ALLOW_LOCAL_STORAGE` | `true` lets a single self-hosted server save to its own disk |
 
-Branches, domain tags and blocked file types are in `src/lib/config.ts`. Page text is in `src/lib/content.ts`.
+Branches and blocked file types are in `src/lib/config.ts`. Page text is in `src/lib/content.ts`.
 
 ## Hero photo
 
