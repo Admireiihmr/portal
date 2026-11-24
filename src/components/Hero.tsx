@@ -249,7 +249,7 @@ export default function Hero() {
           <h1>
             <span className="hl">
               <motion.span initial={{ y: reduce ? 0 : "110%" }} animate={{ y: 0 }} transition={{ delay: 0.12, duration: 0.9, ease }}>
-                From Pitch
+                Pitch
               </motion.span>
             </span>
             <span className="hl grad">
