@@ -150,12 +150,12 @@ export default function Steps() {
             <motion.h2 className="st-title" initial="hidden" whileInView="show" viewport={inView}>
               <span className="hl">
                 <motion.span variants={{ hidden: { y: reduce ? "0%" : "110%" }, show: { y: "0%", transition: { duration: 0.9, ease } } }}>
-                  From Idea to Stage in <em>Eight Steps</em>
+                  From Spark <em>to Spotlight</em>
                 </motion.span>
               </span>
             </motion.h2>
             <motion.p className="st-sub" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView} transition={{ delay: 0.2, duration: 0.6, ease }}>
-              A simple, transparent journey from submission to the final stage.
+              Eight simple steps take you from your first idea to the Foundation Day stage.
             </motion.p>
           </div>
 
