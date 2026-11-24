@@ -209,6 +209,8 @@ img { display: block; max-width: 100%; }
 .stat { width: 100%; padding: 26px 24px; }
 .stats > div:nth-child(odd) .stat { border-right: 1px solid var(--line); }
 .stats > div:nth-child(-n + 2) .stat { border-bottom: 1px solid var(--line); }
+.stats > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.stats > div:last-child:nth-child(odd) .stat { border-right: 0; }
 .stat dd { margin: 0; font: 600 clamp(2rem, 3.6vw, 2.8rem)/1 var(--font-display), sans-serif; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
 .stat dt { margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
 

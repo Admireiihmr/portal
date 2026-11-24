@@ -81,7 +81,7 @@ export function Laurel({ n, color }: { n: number; color: string }) {
 
 const CARDS = [
   { icon: "trophy", title: "3 Consolation Awards", text: "Three more ideas are recognised on the day." },
-  { icon: "users", title: "Four Minutes on Stage", text: "Every finalist pitches to the expert panel." },
+  { icon: "users", title: "Pitch on Stage", text: "Every finalist presents to the expert panel." },
   { icon: "cert", title: "Certificate", text: "For every presenter, printed and digital." },
 ];
 

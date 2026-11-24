@@ -25,7 +25,6 @@ export const TICKER_B =["IIHMR Bangalore", "ADMIRE", "Foundation Day", "Your ide
 export const STATS = [
   { to: 15, suffix: "", label: "students present on stage" },
   { to: 6, suffix: "", label: "awards to be won" },
-  { to: 4, suffix: " min", label: "to pitch your idea" },
   { to: 7, suffix: " days", label: "submission window" },
 ];
 
@@ -35,7 +34,7 @@ export const STEPS = [
   { t: "Initial Screening", d: "Submissions are checked for completeness and eligibility." },
   { t: "Expert Review", d: "Domain experts evaluate each abstract and select the best ideas." },
   { t: "Shortlist of 15", d: "The top 15 ideas are selected to present on Foundation Day." },
-  { t: "Prepare Your Pitch", d: "Create a 4-minute PPT, poster or video covering your problem, idea and impact." },
+  { t: "Prepare Your Pitch", d: "Create a PPT, poster or video covering your problem, idea and impact." },
   { t: "Present on Foundation Day", d: "The 15 shortlisted students present their ideas to the expert panel." },
   { t: "Awards & Recognition", d: "Three winners and three consolation awards are announced, with certificates for all presenters." },
 ];
