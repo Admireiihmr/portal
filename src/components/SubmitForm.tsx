@@ -4,6 +4,7 @@ import { useRef, useState, type DragEvent, type FormEvent, type ReactNode } from
 import { BRANCHES, DEADLINE_TEXT, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
 import { normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
 import Icon from "./Icon";
+import { Doctor } from "./Hero";
 import Reveal from "./Reveal";
 
 type Status = "idle" | "sending" | "done";
@@ -39,7 +40,9 @@ function Field({ icon, children }: { icon: string; children: ReactNode }) {
   );
 }
 
-/** Laptop with an uploading document, a glowing bulb and a stack of books. */
+const GLOW = { fill: "none", stroke: "#d4c4ff", strokeWidth: 3, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+
+/** Laptop with an uploading document, a glowing caduceus and a stack of books. */
 function SubmitArt() {
   return (
     <svg viewBox="0 0 360 230" aria-hidden="true">
@@ -48,13 +51,8 @@ function SubmitArt() {
           <stop offset="0" stopColor="#9a7dff" />
           <stop offset="1" stopColor="#5b3bd6" />
         </linearGradient>
-        <radialGradient id="saGold" cx="40%" cy="35%" r="70%">
-          <stop offset="0" stopColor="#fff3b0" />
-          <stop offset=".55" stopColor="#f9c63a" />
-          <stop offset="1" stopColor="#d99410" />
-        </radialGradient>
         <filter id="saGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="5" result="b" />
+          <feGaussianBlur stdDeviation="4" result="b" />
           <feMerge>
             <feMergeNode in="b" />
             <feMergeNode in="SourceGraphic" />
@@ -62,36 +60,91 @@ function SubmitArt() {
         </filter>
       </defs>
       {/* laptop */}
-      <rect x="40" y="58" width="170" height="118" rx="10" fill="url(#saV)" />
-      <rect x="50" y="68" width="150" height="98" rx="6" fill="#2b1d70" />
-      <path d="M20 180h210l-14 18H34z" fill="#8f73f2" />
-      <path d="M20 180h210" stroke="#c4b2ff" strokeWidth="3" />
-      {/* document rising out of the screen */}
+      <rect x="30" y="58" width="170" height="118" rx="10" fill="none" stroke="#c9b4ff" strokeWidth="4" filter="url(#saGlow)" />
+      <rect x="40" y="68" width="150" height="98" rx="6" fill="#2b1d70" opacity=".7" />
+      <path d="M10 180h210l-14 16H24z" fill="#8f73f2" stroke="#d4c4ff" strokeWidth="2" />
       <g className="sa-doc">
-        <rect x="78" y="24" width="96" height="128" rx="8" fill="#f4f0ff" stroke="#c9bbff" strokeWidth="2" />
-        <rect x="92" y="98" width="68" height="6" rx="3" fill="#c9bbff" />
-        <rect x="92" y="112" width="56" height="6" rx="3" fill="#c9bbff" />
-        <rect x="92" y="126" width="62" height="6" rx="3" fill="#c9bbff" />
-        <rect x="104" y="44" width="44" height="40" rx="10" fill="url(#saV)" />
-        <path d="M126 76V56M118 63l8-8 8 8" stroke="#fff" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="70" y="26" width="92" height="124" rx="8" fill="#f4f0ff" />
+        <rect x="84" y="98" width="64" height="6" rx="3" fill="#c9bbff" />
+        <rect x="84" y="112" width="52" height="6" rx="3" fill="#c9bbff" />
+        <rect x="84" y="126" width="58" height="6" rx="3" fill="#c9bbff" />
+        <rect x="94" y="44" width="44" height="40" rx="8" fill="url(#saV)" />
+        <path d="M116 76V56M108 63l8-8 8 8" stroke="#fff" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       </g>
       {/* books */}
-      <rect x="236" y="168" width="104" height="20" rx="4" fill="#7a5df0" />
-      <rect x="236" y="168" width="104" height="5" rx="2" fill="#f7e6c4" />
-      <rect x="244" y="146" width="90" height="22" rx="4" fill="#9a7dff" />
-      <rect x="244" y="146" width="90" height="5" rx="2" fill="#f7e6c4" />
-      {/* bulb */}
-      <g className="sa-bulb">
-        <g stroke="#f9c63a" strokeWidth="4" strokeLinecap="round">
-          <path d="M290 18v-10M262 28l-7-7M318 28l7-7M250 56h-10M330 56h10" />
-        </g>
-        <circle cx="290" cy="64" r="34" fill="url(#saGold)" filter="url(#saGlow)" />
-        <path d="M278 66l8-10 6 14 8-12" stroke="#fff6d6" strokeWidth="3" fill="none" strokeLinecap="round" />
-        <rect x="276" y="98" width="28" height="9" rx="4" fill="#c9bbff" />
-        <rect x="279" y="109" width="22" height="9" rx="4" fill="#9a7dff" />
-        <rect x="270" y="120" width="40" height="24" rx="6" fill="url(#saV)" />
+      <rect x="238" y="176" width="100" height="18" rx="4" fill="#6a4ce0" stroke="#c9b4ff" strokeWidth="2" />
+      <rect x="246" y="156" width="88" height="20" rx="4" fill="#8466f0" stroke="#c9b4ff" strokeWidth="2" />
+      <rect x="240" y="138" width="92" height="18" rx="4" fill="#5b3bd6" stroke="#c9b4ff" strokeWidth="2" />
+      {/* caduceus */}
+      <g className="sa-bulb" filter="url(#saGlow)">
+        <path d="M288 30v106" stroke="#efe9ff" strokeWidth="4" strokeLinecap="round" />
+        <circle cx="288" cy="26" r="6" fill="#efe9ff" />
+        <path d="M288 40c-20-6-40-4-54 8 16 0 30 2 40 8M288 40c20-6 40-4 54 8-16 0-30 2-40 8" fill="none" stroke="#d4c4ff" strokeWidth="3.5" strokeLinecap="round" />
+        <path d="M276 60c24 8 24 20 0 28s-24 20 0 28M300 60c-24 8-24 20 0 28s24 20 0 28" fill="none" stroke="#b79cff" strokeWidth="3.5" strokeLinecap="round" />
       </g>
     </svg>
+  );
+}
+
+/** Heart with a plus and an ECG lead-in, beside the title. */
+function HeartPulse() {
+  return (
+    <svg className="sx-heart" viewBox="0 0 200 90" aria-hidden="true">
+      <g {...GLOW} className="glow-stroke">
+        <path d="M0 56h50l8-14 10 30 12-50 12 44 8-10h20" />
+        <path d="M156 74c-24-16-36-28-36-42 0-11 8-18 17-18 8 0 14 5 19 11 5-6 11-11 19-11 9 0 17 7 17 18 0 14-12 26-36 42z" />
+        <path d="M150 40h12v-10h10v10h12v10h-12v10h-10V50h-12z" fill="#fff" stroke="none" />
+      </g>
+    </svg>
+  );
+}
+
+/** Three hexagon tiles on the left edge: ECG, plus, capsule. */
+function SxHex() {
+  const hex = "M50 4l40 23v46L50 96 10 73V27z";
+  return (
+    <svg className="sx-hex" viewBox="0 0 200 260" aria-hidden="true">
+      {[
+        { x: 0, y: 0, icon: <path d="M24 52h14l6-12 8 22 8-30 8 26 4-6h12" /> },
+        { x: 82, y: 50, icon: <path d="M44 32h12v12h12v12H56v12H44V56H32V44h12z" fill="#fff" stroke="none" /> },
+        { x: 26, y: 120, icon: <g transform="rotate(-40 50 50)"><rect x="38" y="28" width="24" height="44" rx="12" /><path d="M38 50h24" /></g> },
+      ].map((t, i) => (
+        <g key={i} transform={`translate(${t.x} ${t.y})`}>
+          <g className="hx-tile" style={{ animationDelay: `${-i * 0.5}s` }}>
+            <path d={hex} fill="rgba(143,108,255,.25)" stroke="#c9b4ff" strokeWidth="2.5" className="glow-stroke" />
+            <g fill="none" stroke="#fff" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round">{t.icon}</g>
+          </g>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/** Hospital outline (bottom left) and DNA helix (right). */
+function SxScenery() {
+  return (
+    <>
+      <svg className="sx-hosp" viewBox="0 0 300 200" aria-hidden="true">
+        <g fill="none" stroke="#b79cff" strokeWidth="2" opacity=".7">
+          <path d="M20 200V70h120v130M140 110h110v90M60 70V40h40v30" />
+          <path d="M72 50h16M80 42v16" strokeWidth="4" />
+          {[0, 1, 2].map((r) => [0, 1, 2].map((c) => <rect key={`${r}${c}`} x={36 + c * 34} y={90 + r * 32} width="18" height="16" />))}
+          {[0, 1].map((r) => [0, 1, 2].map((c) => <rect key={`b${r}${c}`} x={156 + c * 30} y={128 + r * 30} width="16" height="14" />))}
+        </g>
+      </svg>
+      <svg className="sx-dna" viewBox="0 0 140 320" aria-hidden="true">
+        <g fill="none" stroke="#c9b4ff" strokeWidth="2.5" className="glow-stroke" opacity=".8">
+          <path d="M20 0c0 40 100 60 100 100S20 160 20 200s100 60 100 100" />
+          <path d="M120 0c0 40-100 60-100 100s100 60 100 100-100 60-100 100" />
+          {Array.from({ length: 14 }, (_, i) => {
+            const y = 12 + i * 22;
+            const t = Math.sin((y / 200) * Math.PI);
+            const w = Math.abs(t) * 46;
+            return <path key={i} d={`M${70 - w} ${y}h${w * 2}`} strokeWidth="1.5" opacity=".7" />;
+          })}
+        </g>
+      </svg>
+    </>
   );
 }
 
@@ -200,6 +253,9 @@ export default function SubmitForm() {
           <path key={i} d={`M-100 ${200 + i * 9} C 260 ${90 + i * 10}, 640 ${280 - i * 6}, 980 ${170 + i * 7} S 1380 ${70 + i * 9}, 1600 ${160 + i * 5}`} fill="none" stroke="#c4adff" strokeWidth={i === 2 ? 2 : 1} opacity={0.18 + (i === 2 ? 0.4 : (i % 3) * 0.08)} />
         ))}
       </svg>
+      <div className="sx-doc"><Doctor /></div>
+      <SxHex />
+      <SxScenery />
       <div className="wrap sx-grid">
         <Reveal from="left" className="sx-side">
           <p className="sx-label">06 — Submit <i /></p>
@@ -212,9 +268,7 @@ export default function SubmitForm() {
                 Abstract
               </motion.span>
             </span>
-            <svg className="sx-swoosh" viewBox="0 0 240 20" aria-hidden="true">
-              <motion.path d="M4 14 C 70 4, 160 4, 236 9" fill="none" stroke="#c9a8ff" strokeWidth="4" strokeLinecap="round" variants={{ hidden: { pathLength: 0 }, show: { pathLength: 1, transition: { delay: 0.6, duration: 0.8 } } }} />
-            </svg>
+            <HeartPulse />
           </motion.h2>
           <p className="sx-lead">Turn your idea into impact. Fill in the form and upload your abstract to participate in Foundation Day.</p>
           <ul className="sx-list">
@@ -242,6 +296,12 @@ export default function SubmitForm() {
 
         <Reveal from="right">
           <div className="form-card sx-card">
+            <svg className="sx-card-hex" viewBox="0 0 160 120" aria-hidden="true">
+              <g fill="none" stroke="#c9b4ff" strokeWidth="1.5">
+                <path d="M40 10l17 10v20L40 50 23 40V20z" /><path d="M76 30l17 10v20L76 70 59 60V40z" /><path d="M112 10l17 10v20l-17 10-17-10V20z" fill="rgba(167,139,255,.25)" /><path d="M76 70l17 10v20l-17 10-17-10V80z" />
+              </g>
+              <path d="M106 30h12M112 24v12" stroke="#8f6cff" strokeWidth="3" strokeLinecap="round" />
+            </svg>
             <AnimatePresence mode="wait">
               {status === "done" ? (
                 <motion.div key="done" className="done" initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}>

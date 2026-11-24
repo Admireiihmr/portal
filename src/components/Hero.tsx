@@ -161,7 +161,7 @@ function HexCluster() {
 }
 
 /** Soft, out-of-focus doctor in a white coat with a stethoscope, at the left edge. */
-function Doctor() {
+export function Doctor() {
   return (
     <svg className="hero-doc" viewBox="0 0 260 620" aria-hidden="true">
       <defs>
