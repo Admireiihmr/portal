@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState, type DragEvent, type FormEvent, type ReactNode } from "react";
 import { BRANCHES, DEADLINE_TEXT, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
@@ -252,6 +253,9 @@ export default function SubmitForm() {
           <path key={i} d={`M-100 ${200 + i * 9} C 260 ${90 + i * 10}, 640 ${280 - i * 6}, 980 ${170 + i * 7} S 1380 ${70 + i * 9}, 1600 ${160 + i * 5}`} fill="none" stroke="#c4adff" strokeWidth={i === 2 ? 2 : 1} opacity={0.18 + (i === 2 ? 0.4 : (i % 3) * 0.08)} />
         ))}
       </svg>
+      <div className="doc-photo sx-doc-photo" aria-hidden>
+        <Image src="/images/doctor-coat.jpg" alt="" fill sizes="(max-width: 1200px) 0px, 360px" style={{ objectFit: "cover", objectPosition: "50% 70%" }} />
+      </div>
       <SxHex />
       <SxScenery />
       <div className="wrap sx-grid">

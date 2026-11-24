@@ -707,3 +707,9 @@ img { display: block; max-width: 100%; }
   .gd-platform .p2 { height: 50px; bottom: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { .gd-bulb-orbit, .gd-platform .p3 { animation: none; } }
+
+/* ───────── doctor photo (hero + submit) ───────── */
+.doc-photo { position: absolute; left: 0; top: 0; bottom: 0; width: min(26vw, 400px); z-index: 0; pointer-events: none; overflow: hidden; opacity: 0.5; -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent 100%), linear-gradient(180deg, transparent 0, #000 18%, #000 75%, transparent 100%); -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, #000 30%, transparent 100%), linear-gradient(180deg, transparent 0, #000 18%, #000 75%, transparent 100%); mask-composite: intersect; }
+.doc-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(90, 55, 214, 0.35), rgba(40, 20, 110, 0.5)); mix-blend-mode: multiply; }
+.sx-doc-photo { width: min(22vw, 320px); bottom: 35%; opacity: 0.4; }
+@media (max-width: 1180px) { .doc-photo { display: none; } }

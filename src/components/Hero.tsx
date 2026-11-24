@@ -222,6 +222,9 @@ export default function Hero() {
     >
       <div className="hero-glow g1" aria-hidden />
       <div className="hero-glow g2" aria-hidden />
+      <div className="doc-photo" aria-hidden>
+        <Image src="/images/doctor-coat.jpg" alt="" fill sizes="(max-width: 1180px) 0px, 420px" style={{ objectFit: "cover", objectPosition: "50% 70%" }} />
+      </div>
       <Waves />
       <PulseCorner />
       <DeskCorner />
