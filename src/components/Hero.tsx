@@ -1,7 +1,7 @@
 "use client";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useId, type ReactNode } from "react";
+import { useId } from "react";
 import { DEADLINE_TEXT } from "@/lib/config";
 import Icon from "./Icon";
 import Magnetic from "./Magnetic";
@@ -110,67 +110,6 @@ function Waves() {
   );
 }
 
-/** Hexagon tiles with medical icons: heart-pulse, plus, capsule, DNA with people. */
-function HexCluster() {
-  const hex = "M50 4l40 23v46L50 96 10 73V27z";
-  const tiles: { x: number; y: number; icon: ReactNode; d: number }[] = [
-    {
-      x: 10, y: 0, d: 0,
-      icon: <path d="M50 70C34 59 26 50 26 40c0-8 6-13 12-13 5 0 9 3 12 7 3-4 7-7 12-7 6 0 12 5 12 13 0 10-8 19-24 30zM30 47h10l4-7 6 14 4-7h16" />,
-    },
-    { x: 94, y: 52, d: 0.4, icon: <path d="M44 32h12v12h12v12H56v12H44V56H32V44h12z" fill="#fff" stroke="none" /> },
-    {
-      x: 10, y: 104, d: 0.8,
-      icon: (
-        <g transform="rotate(-40 50 50)">
-          <rect x="36" y="26" width="28" height="48" rx="14" />
-          <path d="M36 50h28" />
-        </g>
-      ),
-    },
-    {
-      x: 10, y: 208, d: 1.2,
-      icon: (
-        <g>
-          <path d="M40 26c0 10 20 14 20 24S40 64 40 74M60 26c0 10-20 14-20 24s20 14 20 24M42 34h16M42 66h16" />
-          <circle cx="28" cy="52" r="5" />
-          <path d="M20 72c0-6 4-10 8-10s8 4 8 10" />
-          <circle cx="72" cy="52" r="5" />
-          <path d="M64 72c0-6 4-10 8-10s8 4 8 10" />
-        </g>
-      ),
-    },
-  ];
-  return (
-    <svg className="hx" viewBox="0 0 200 310" aria-hidden="true">
-      <defs>
-        <linearGradient id="hxFill" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#8f6cff" stopOpacity=".35" />
-          <stop offset="1" stopColor="#3a2690" stopOpacity=".55" />
-        </linearGradient>
-        <filter id="hxGlow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="3" result="b" />
-          <feMerge>
-            <feMergeNode in="b" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      {tiles.map((t, i) => (
-        <g key={i} transform={`translate(${t.x} ${t.y})`}>
-          <g className="hx-tile" style={{ animationDelay: `${-t.d}s` }}>
-            <path d={hex} fill="url(#hxFill)" stroke="#c9b4ff" strokeWidth="2.5" filter="url(#hxGlow)" />
-            <path d="M50 12l33 19v38" fill="none" stroke="#fff" strokeOpacity=".25" strokeWidth="2" />
-            <g fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
-              {t.icon}
-            </g>
-          </g>
-        </g>
-      ))}
-    </svg>
-  );
-}
-
 /** Glowing ECG trace with medical crosses (top right). */
 function PulseCorner() {
   return (
@@ -205,22 +144,6 @@ function DeskCorner() {
   );
 }
 
-/** Glowing caduceus (doctor's symbol) shown over the doctor photo. */
-function Caduceus() {
-  return (
-    <svg className="hero-cad" viewBox="0 0 160 220" aria-hidden="true">
-      <g fill="none" stroke="#e6dcff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="glow-stroke">
-        <path d="M80 26v184" strokeWidth="5" />
-        <circle cx="80" cy="18" r="8" fill="#e6dcff" />
-        <path d="M80 40C60 26 30 22 6 34c22 2 40 8 56 18M80 40c20-14 50-18 74-6-22 2-40 8-56 18" />
-        <path d="M80 50c-34 10-34 30 0 40s34 30 0 40-34 30 0 40M80 50c34 10 34 30 0 40s-34 30 0 40 34 30 0 40" stroke="#c9b4ff" />
-        <circle cx="60" cy="60" r="3" fill="#fff" stroke="none" />
-        <circle cx="100" cy="60" r="3" fill="#fff" stroke="none" />
-      </g>
-    </svg>
-  );
-}
-
 export default function Hero() {
   const reduce = useReducedMotion();
 
@@ -249,18 +172,16 @@ export default function Hero() {
     >
       <div className="hero-glow g1" aria-hidden />
       <div className="hero-glow g2" aria-hidden />
-      <div className="doc-photo" aria-hidden>
-        <Image src="/images/doctor-coat.jpg" alt="" fill sizes="(max-width: 1180px) 0px, 420px" style={{ objectFit: "cover", objectPosition: "50% 70%" }} />
-      </div>
-      <Caduceus />
       <Waves />
       <PulseCorner />
       <DeskCorner />
 
       <div className="hero-in">
-        <motion.div className="hero-hex" initial={{ opacity: 0, x: reduce ? 0 : -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease }}>
-          <Parallax y={-30}>
-            <HexCluster />
+        <motion.div className="hero-art" aria-hidden initial={{ opacity: 0, x: reduce ? 0 : -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1, ease }}>
+          <Parallax y={-24}>
+            <div className="doc-art">
+              <Image src="/images/doctor-hero.png" alt="" fill priority sizes="(max-width: 1180px) 0px, 420px" style={{ objectFit: "contain" }} />
+            </div>
           </Parallax>
         </motion.div>
 
