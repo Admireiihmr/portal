@@ -716,9 +716,9 @@ img { display: block; max-width: 100%; }
 .hero h1 { font-size: clamp(2.9rem, 5.2vw, 5rem); }
 @media (max-width: 640px) { .hero-sub { font-size: 0.78rem; letter-spacing: 0.1em; } }
 
-/* hero doctor artwork (first column) */
-.hero-in { grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.1fr) minmax(0, 0.95fr); }
-.hero-art { position: relative; z-index: 1; align-self: center; margin-left: calc(var(--gutter) * -1 - 20px); }
-.doc-art { position: relative; width: 100%; aspect-ratio: 1; -webkit-mask-image: radial-gradient(closest-side, #000 64%, transparent 100%); mask-image: radial-gradient(closest-side, #000 64%, transparent 100%); filter: drop-shadow(0 0 30px rgba(150, 110, 255, 0.35)); }
-@media (max-width: 1180px) { .hero-in { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); } .hero-art { display: none; } }
+/* hero hexagon icons (first column) */
+.hero-in { grid-template-columns: 190px minmax(0, 1.15fr) minmax(0, 0.95fr); }
+.hero-hex { position: relative; z-index: 2; align-self: center; transform: translateY(-20px); }
+.hx { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 0 18px rgba(170, 140, 255, 0.45)); }
+@media (max-width: 1180px) { .hero-in { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); } .hero-hex { display: none; } }
 @media (max-width: 900px) { .hero-in { grid-template-columns: minmax(0, 1fr); } }
