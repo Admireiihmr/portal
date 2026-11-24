@@ -123,7 +123,7 @@ function PulseCorner() {
   );
 }
 
-/** Stethoscope on the desk and a glass cube with a glowing plus (bottom right). */
+/** Glass cube with a glowing plus (bottom right). */
 function DeskCorner() {
   return (
     <svg className="hero-desk" viewBox="0 0 420 260" aria-hidden="true">
@@ -133,8 +133,6 @@ function DeskCorner() {
           <stop offset="1" stopColor="#a78bff" stopOpacity=".2" />
         </linearGradient>
       </defs>
-      <path d="M40 190c40-50 140-40 170 0 20 26-10 40-50 40" fill="none" stroke="#d9d0ff" strokeOpacity=".75" strokeWidth="9" strokeLinecap="round" />
-      <ellipse cx="160" cy="232" rx="34" ry="11" fill="#e8e4ff" stroke="#9a86e8" strokeWidth="5" />
       <g className="cube-float">
         <path d="M260 70l70-28 70 28v86l-70 30-70-30z" fill="url(#cubeG)" stroke="#e6dcff" strokeWidth="2.5" />
         <path d="M260 70l70 30 70-30M330 100v86" fill="none" stroke="#e6dcff" strokeWidth="2" opacity=".7" />
