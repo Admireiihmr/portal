@@ -4,7 +4,6 @@ import { useRef, useState, type DragEvent, type FormEvent, type ReactNode } from
 import { BRANCHES, DEADLINE_TEXT, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
 import { normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
 import Icon from "./Icon";
-import { Doctor } from "./Hero";
 import Reveal from "./Reveal";
 
 type Status = "idle" | "sending" | "done";
@@ -253,7 +252,6 @@ export default function SubmitForm() {
           <path key={i} d={`M-100 ${200 + i * 9} C 260 ${90 + i * 10}, 640 ${280 - i * 6}, 980 ${170 + i * 7} S 1380 ${70 + i * 9}, 1600 ${160 + i * 5}`} fill="none" stroke="#c4adff" strokeWidth={i === 2 ? 2 : 1} opacity={0.18 + (i === 2 ? 0.4 : (i % 3) * 0.08)} />
         ))}
       </svg>
-      <div className="sx-doc"><Doctor /></div>
       <SxHex />
       <SxScenery />
       <div className="wrap sx-grid">

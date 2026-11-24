@@ -6,7 +6,7 @@ import Icon from "./Icon";
 
 const LINKS = [
   ["About", "#about"],
-  ["Rules", "#rules"],
+  ["Guidelines", "#guidelines"],
   ["How it works", "#journey"],
   ["Awards", "#awards"],
   ["FAQ", "#faq"],

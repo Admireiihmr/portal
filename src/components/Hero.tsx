@@ -160,38 +160,6 @@ function HexCluster() {
   );
 }
 
-/** Soft, out-of-focus doctor in a white coat with a stethoscope, at the left edge. */
-export function Doctor() {
-  return (
-    <svg className="hero-doc" viewBox="0 0 260 620" aria-hidden="true">
-      <defs>
-        <linearGradient id="docCoat" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#f3efff" />
-          <stop offset=".6" stopColor="#cfc2ff" />
-          <stop offset="1" stopColor="#8f78e8" />
-        </linearGradient>
-        <linearGradient id="docShade" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#6e56d6" stopOpacity=".55" />
-          <stop offset="1" stopColor="#6e56d6" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      {/* coat */}
-      <path d="M-40 70c40-20 90-30 140-30 30 0 60 14 76 40l40 120 30 420H-40z" fill="url(#docCoat)" />
-      <path d="M-40 70c40-20 90-30 140-30l-30 160-40 420H-40z" fill="url(#docShade)" />
-      {/* scrubs under the coat */}
-      <path d="M100 40c30 0 60 14 76 40l-44 90z" fill="#6a52cf" opacity=".85" />
-      {/* lapel */}
-      <path d="M100 40l32 130 44-90" fill="none" stroke="#b6a6f2" strokeWidth="4" />
-      <path d="M150 210l60 410" stroke="#b6a6f2" strokeWidth="3" />
-      {/* stethoscope */}
-      <path d="M70 40c-10 70 10 150 50 200 30 36 60 40 70 20" fill="none" stroke="#2a2357" strokeWidth="9" strokeLinecap="round" />
-      <path d="M150 50c10 60 10 120 0 170" fill="none" stroke="#2a2357" strokeWidth="9" strokeLinecap="round" />
-      <circle cx="196" cy="246" r="26" fill="#cfd3e6" stroke="#2a2357" strokeWidth="8" />
-      <circle cx="196" cy="246" r="12" fill="#8f97b8" />
-    </svg>
-  );
-}
-
 /** Glowing ECG trace with medical crosses (top right). */
 function PulseCorner() {
   return (
@@ -255,7 +223,6 @@ export default function Hero() {
       <div className="hero-glow g1" aria-hidden />
       <div className="hero-glow g2" aria-hidden />
       <Waves />
-      <Doctor />
       <PulseCorner />
       <DeskCorner />
 
@@ -312,8 +279,8 @@ export default function Hero() {
               </a>
             </Magnetic>
             <Magnetic>
-              <a href="#rules" className="btn btn-glow btn-lg">
-                <Icon name="book" size={18} /> Read the Rules
+              <a href="#guidelines" className="btn btn-glow btn-lg">
+                <Icon name="book" size={18} /> Guidelines
               </a>
             </Magnetic>
           </motion.div>

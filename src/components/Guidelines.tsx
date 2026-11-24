@@ -68,7 +68,7 @@ export default function Guidelines() {
   const reduce = useReducedMotion();
   const inView = { once: true, margin: "-80px" } as const;
   return (
-    <section id="rules" className="gd" aria-labelledby="gd-title">
+    <section id="guidelines" className="gd" aria-labelledby="gd-title">
       <span className="gd-glow g1" aria-hidden />
       <span className="gd-glow g2" aria-hidden />
       <div className="wrap gd-inner">
