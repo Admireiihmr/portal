@@ -717,3 +717,6 @@ img { display: block; max-width: 100%; }
 .hero-sub + .hero-lead { margin-top: 16px; }
 .hero h1 { font-size: clamp(2.9rem, 5.2vw, 5rem); }
 @media (max-width: 640px) { .hero-sub { font-size: 0.78rem; letter-spacing: 0.1em; } }
+.hero-cad { position: absolute; left: 2.5%; bottom: 19%; width: 112px; z-index: 1; pointer-events: none; opacity: 0.9; animation: hxFloat 5s ease-in-out infinite; }
+@media (max-width: 1180px) { .hero-cad { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-cad { animation: none; } }

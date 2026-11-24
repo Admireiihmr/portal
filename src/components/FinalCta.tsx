@@ -20,7 +20,7 @@ function CtaArt() {
         <rect x="104" y="20" width="8" height="30" fill="#ff8fb8" />
       </svg>
       <div className="fc-bulb">
-        <Bulb />
+        <Bulb heart />
       </div>
       <svg className="fc-laptop" viewBox="0 0 150 100">
         <rect x="20" y="6" width="112" height="72" rx="6" fill="#6a4ce0" />

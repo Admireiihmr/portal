@@ -9,8 +9,8 @@ import Parallax from "./Parallax";
 
 const ease = [0.2, 0.8, 0.2, 1] as const;
 
-/** Glowing glass bulb with a sprout, on a lit pedestal with an orbit ring. */
-export function Bulb() {
+/** Glowing glass bulb with a sprout (or a heart), on a lit pedestal with an orbit ring. */
+export function Bulb({ heart = false }: { heart?: boolean }) {
   const u = useId().replace(/:/g, "");
   return (
     <svg className="bulb" viewBox="0 0 220 300" aria-hidden="true">
@@ -49,10 +49,21 @@ export function Bulb() {
         {/* glass */}
         <path d="M110 30c-36 0-62 27-62 61 0 22 11 37 23 50 8 9 12 18 12 28v9h54v-9c0-10 4-19 12-28 12-13 23-28 23-50 0-34-26-61-62-61z" fill={`url(#bGlass${u})`} stroke="#b9a6ff" strokeWidth="2.5" filter={`url(#bGlow${u})`} />
         <path d="M78 64c8-12 20-18 32-19" stroke="#fff" strokeOpacity=".7" strokeWidth="4" strokeLinecap="round" fill="none" />
-        {/* sprout */}
-        <path d="M110 172v-60" stroke="#9ff5e6" strokeWidth="3" strokeLinecap="round" filter={`url(#bGlow${u})`} />
-        <path d="M110 128c-4-20-22-30-40-26 4 18 20 30 40 26z" fill={`url(#bLeaf${u})`} filter={`url(#bGlow${u})`} />
-        <path d="M110 118c4-22 24-32 42-28-4 20-22 32-42 28z" fill={`url(#bLeaf${u})`} filter={`url(#bGlow${u})`} />
+        {heart ? (
+          <g filter={`url(#bGlow${u})`}>
+            {/* heart with a pulse line */}
+            <path d="M110 170c-30-20-46-36-46-56 0-14 10-24 23-24 10 0 18 6 23 14 5-8 13-14 23-14 13 0 23 10 23 24 0 20-16 36-46 56z" fill="#ff7ab6" stroke="#ffd0e6" strokeWidth="2.5" />
+            <path d="M74 124h18l6-12 10 24 8-18 5 6h22" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M110 170v8" stroke="#ffb3d4" strokeWidth="3" strokeLinecap="round" />
+          </g>
+        ) : (
+          <>
+            {/* sprout */}
+            <path d="M110 172v-60" stroke="#9ff5e6" strokeWidth="3" strokeLinecap="round" filter={`url(#bGlow${u})`} />
+            <path d="M110 128c-4-20-22-30-40-26 4 18 20 30 40 26z" fill={`url(#bLeaf${u})`} filter={`url(#bGlow${u})`} />
+            <path d="M110 118c4-22 24-32 42-28-4 20-22 32-42 28z" fill={`url(#bLeaf${u})`} filter={`url(#bGlow${u})`} />
+          </>
+        )}
         {/* base */}
         <rect x="84" y="178" width="52" height="11" rx="5" fill="#c4b6ff" />
         <rect x="87" y="192" width="46" height="10" rx="5" fill="#9e8cf0" />
@@ -194,6 +205,22 @@ function DeskCorner() {
   );
 }
 
+/** Glowing caduceus (doctor's symbol) shown over the doctor photo. */
+function Caduceus() {
+  return (
+    <svg className="hero-cad" viewBox="0 0 160 220" aria-hidden="true">
+      <g fill="none" stroke="#e6dcff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className="glow-stroke">
+        <path d="M80 26v184" strokeWidth="5" />
+        <circle cx="80" cy="18" r="8" fill="#e6dcff" />
+        <path d="M80 40C60 26 30 22 6 34c22 2 40 8 56 18M80 40c20-14 50-18 74-6-22 2-40 8-56 18" />
+        <path d="M80 50c-34 10-34 30 0 40s34 30 0 40-34 30 0 40M80 50c34 10 34 30 0 40s-34 30 0 40 34 30 0 40" stroke="#c9b4ff" />
+        <circle cx="60" cy="60" r="3" fill="#fff" stroke="none" />
+        <circle cx="100" cy="60" r="3" fill="#fff" stroke="none" />
+      </g>
+    </svg>
+  );
+}
+
 export default function Hero() {
   const reduce = useReducedMotion();
 
@@ -225,6 +252,7 @@ export default function Hero() {
       <div className="doc-photo" aria-hidden>
         <Image src="/images/doctor-coat.jpg" alt="" fill sizes="(max-width: 1180px) 0px, 420px" style={{ objectFit: "cover", objectPosition: "50% 70%" }} />
       </div>
+      <Caduceus />
       <Waves />
       <PulseCorner />
       <DeskCorner />
