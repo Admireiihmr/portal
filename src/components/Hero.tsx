@@ -243,12 +243,12 @@ export default function Hero() {
           <h1>
             <span className="hl">
               <motion.span initial={{ y: reduce ? 0 : "110%" }} animate={{ y: 0 }} transition={{ delay: 0.12, duration: 0.9, ease }}>
-                Foundation Day
+                From Pitch
               </motion.span>
             </span>
             <span className="hl grad">
               <motion.span initial={{ y: reduce ? 0 : "110%" }} animate={{ y: 0 }} transition={{ delay: 0.22, duration: 0.9, ease }}>
-                Idea Presentation
+                to Pulse
               </motion.span>
             </span>
             <svg className="ecg" viewBox="0 0 420 40" aria-hidden="true">
@@ -272,6 +272,9 @@ export default function Hero() {
               </defs>
             </svg>
           </h1>
+          <motion.p className="hero-sub" {...rise(0.3)}>
+            Foundation Day Idea Presentation
+          </motion.p>
           <motion.p className="hero-lead" {...rise(0.35)}>
             Have an idea that could improve healthcare? Submit a short abstract. Fifteen students will present to an expert panel on Foundation Day.
           </motion.p>

@@ -713,3 +713,7 @@ img { display: block; max-width: 100%; }
 .doc-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(90, 55, 214, 0.35), rgba(40, 20, 110, 0.5)); mix-blend-mode: multiply; }
 .sx-doc-photo { width: min(22vw, 320px); bottom: 35%; opacity: 0.4; }
 @media (max-width: 1180px) { .doc-photo { display: none; } }
+.hero-sub { margin-top: 10px; font: 600 0.9rem var(--font-body), sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #cdbdff; }
+.hero-sub + .hero-lead { margin-top: 16px; }
+.hero h1 { font-size: clamp(2.9rem, 5.2vw, 5rem); }
+@media (max-width: 640px) { .hero-sub { font-size: 0.78rem; letter-spacing: 0.1em; } }
