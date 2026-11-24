@@ -40,13 +40,6 @@ export const STEPS = [
   { t: "Awards & Recognition", d: "Three winners and three consolation awards are announced, with certificates for all presenters." },
 ];
 
-export const FUNNEL = [
-  { icon: "file", short: "Everyone can submit", title: "Open to every IIHMR student", text: "Any student, any idea, any area of health. Submit one abstract online." },
-  { icon: "search", short: "Experts screen", title: "Domain experts review every abstract", text: "Each expert reads the abstracts in their area and picks the strongest." },
-  { icon: "target", short: "15 shortlisted", title: "Fifteen students make it to the stage", text: "You hear by e-mail and receive the presentation template." },
-  { icon: "trophy", short: "6 awards", title: "Three winners and three consolation awards", text: "Chosen on the day, with a certificate for every presenter." },
-];
-
 export const FAQ = [
   { q: "Who can take part?", a: "Any current IIHMR Bangalore student, first or second year. The event is not open to external participants." },
   { q: "Can I submit as a team?", a: "No. Entries are individual and there is a single presenter. You can list your contributors and they will be acknowledged, but the certificate is issued only in the presenter's name." },

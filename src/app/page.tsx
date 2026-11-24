@@ -3,7 +3,6 @@ import CountUp from "@/components/CountUp";
 import Faq from "@/components/Faq";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
-import Funnel from "@/components/Funnel";
 import Hero from "@/components/Hero";
 import Guidelines from "@/components/Guidelines";
 import MobileCta from "@/components/MobileCta";
@@ -63,7 +62,6 @@ export default function Home() {
 
         <Guidelines />
         <Steps />
-        <Funnel />
         <Awards />
         <SubmitForm />
         <Faq />
