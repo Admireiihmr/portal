@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState, type DragEvent, type FormEvent, type ReactNode } from "react";
-import { BRANCHES, DEADLINE_TEXT, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
+import { ACCEPT_ATTR, BRANCHES, DEADLINE_TEXT, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
 import { normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
@@ -278,7 +278,7 @@ export default function SubmitForm() {
               <span className="sx-li-ic"><Icon name="user" size={18} /></span>Individual entry, one presenter
             </li>
             <li>
-              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme, any format for the abstract
+              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme · abstract in PDF or DOCX
             </li>
             <li>
               <span className="sx-li-ic"><Icon name="cloudUpload" size={18} /></span>Up to {MAX_FILE_MB} MB per file
@@ -369,7 +369,7 @@ export default function SubmitForm() {
                   </Field>
 
                   <Field icon="users">
-                    <label htmlFor="collab">Contributors (optional)</label>
+                    <label htmlFor="collab">Contributors (if any)</label>
                     <input id="collab" placeholder="Enter contributor names, if any" value={v.collaborators} onChange={set("collaborators")} />
                   </Field>
 
@@ -390,7 +390,7 @@ export default function SubmitForm() {
                       aria-invalid={!!errors.file}
                       aria-describedby={errors.file ? "e-file" : undefined}
                     >
-                      <input ref={input} type="file" hidden onChange={(e) => pick(e.target.files?.[0])} />
+                      <input ref={input} type="file" accept={ACCEPT_ATTR} hidden onChange={(e) => pick(e.target.files?.[0])} />
                       {file ? (
                         <div className="chip-file">
                           <span className="fi" aria-hidden><Icon name="clip" size={18} /></span>
@@ -406,7 +406,7 @@ export default function SubmitForm() {
                             <Icon name="cloudUpload" size={34} />
                           </motion.span>
                           <b>Drop your file here, or click to browse</b>
-                          <small>Any format · up to {MAX_FILE_MB} MB</small>
+                          <small>PDF or DOCX only · up to {MAX_FILE_MB} MB</small>
                         </>
                       )}
                     </div>

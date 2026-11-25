@@ -1,6 +1,6 @@
 # Foundation Day Idea Presentation – student portal
 
-Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch and an abstract file (any format)**. Each submission is saved to Google Drive in **one folder per student**.
+Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch and an abstract file (PDF or DOCX only)**. Each submission is saved to Google Drive in **one folder per student**.
 
 ```
 <your Drive folder>/
@@ -60,7 +60,7 @@ A website cannot write into a Drive folder just because it has the folder link, 
 | `NEXT_PUBLIC_MAX_FILE_MB` | Max abstract size (default 25) |
 | `ALLOW_LOCAL_STORAGE` | `true` lets a single self-hosted server save to its own disk |
 
-Branches and blocked file types are in `src/lib/config.ts`. Page text is in `src/lib/content.ts`.
+Branches and the allowed file types (PDF, DOCX) are in `src/lib/config.ts`. Page text is in `src/lib/content.ts`.
 
 ## Hero photo
 
@@ -88,7 +88,7 @@ Vercel accepts about 4.5 MB per request, so on Vercel the abstract limit default
 
 ## Safety built in
 
-* Server-side validation of every field and the file; executable types (`exe, msi, bat, cmd, com, scr, vbs, ps1, dll, jar, apk`) are blocked, everything else is accepted.
+* Server-side validation of every field and the file: only PDF (`.pdf`) and Word (`.docx`) are accepted, and the file contents are checked so a renamed file is rejected.
 * Folder and file names are sanitised, so a student cannot write outside their own folder.
 * Hidden honeypot field plus per-IP and per-registration-number rate limits.
 * The Drive script only answers requests that carry the shared secret, and the secret never reaches the browser.

@@ -1,4 +1,4 @@
-import { BLOCKED_EXTENSIONS, BRANCHES, MAX_FILE_MB } from "./config";
+import { ALLOWED_EXTENSIONS, BRANCHES, MAX_FILE_MB } from "./config";
 
 export type Fields = {
   name: string;
@@ -39,8 +39,17 @@ export function validateFields(f: Fields): FieldErrors {
 export function validateFile(file: { name: string; size: number } | null): string | undefined {
   if (!file || file.size === 0) return "Attach your abstract.";
   if (file.size > MAX_FILE_MB * 1024 * 1024) return `File is too large. Maximum is ${MAX_FILE_MB} MB.`;
-  if (BLOCKED_EXTENSIONS.includes(extFor(file.name))) return "This file type is not allowed for security reasons.";
+  if (!ALLOWED_EXTENSIONS.includes(extFor(file.name))) return "Only PDF or Word (.docx) files are accepted.";
   return undefined;
+}
+
+/** Server-side check that the bytes really are a PDF or a DOCX (a DOCX is a zip archive). */
+export function looksLikeAllowedFile(name: string, bytes: Uint8Array): boolean {
+  const ext = extFor(name);
+  const head = String.fromCharCode(...bytes.subarray(0, 5));
+  if (ext === "pdf") return head.startsWith("%PDF-");
+  if (ext === "docx") return bytes[0] === 0x50 && bytes[1] === 0x4b && bytes[2] === 0x03 && bytes[3] === 0x04;
+  return false;
 }
 
 export function normalise(raw: {

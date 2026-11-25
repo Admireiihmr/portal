@@ -15,7 +15,9 @@ export const BRANCHES = [
 const DEFAULT_MAX_MB = process.env.NEXT_PUBLIC_VERCEL_ENV || process.env.VERCEL ? 4 : 25;
 export const MAX_FILE_MB = Number(process.env.NEXT_PUBLIC_MAX_FILE_MB ?? DEFAULT_MAX_MB) || DEFAULT_MAX_MB;
 // A short block-list of directly executable types. Everything else is accepted.
-export const BLOCKED_EXTENSIONS = ["exe", "msi", "bat", "cmd", "com", "scr", "vbs", "ps1", "dll", "jar", "apk"];
+// Abstracts must be PDF or Word (.docx); nothing else is accepted.
+export const ALLOWED_EXTENSIONS = ["pdf", "docx"];
+export const ACCEPT_ATTR = ".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
 export const SUBMISSIONS_OPEN = (process.env.NEXT_PUBLIC_SUBMISSIONS_OPEN ?? "true") !== "false";
 export const DEADLINE_TEXT = process.env.NEXT_PUBLIC_DEADLINE_TEXT ?? "To be announced";

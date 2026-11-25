@@ -3,7 +3,7 @@ import { after } from "next/server";
 import { MAX_FILE_MB } from "@/lib/config";
 import { allow } from "@/lib/ratelimit";
 import { makeNames, saveSubmission, storageMode } from "@/lib/storage";
-import { parseAndValidate } from "@/lib/validation";
+import { looksLikeAllowedFile, parseAndValidate } from "@/lib/validation";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -51,6 +51,11 @@ export async function POST(req: Request) {
   }
 
   const ref = "FD26-" + randomBytes(4).toString("hex").slice(0, 6).toUpperCase();
+  const fileBytes = Buffer.from(await file.arrayBuffer());
+  if (!looksLikeAllowedFile(file.name, fileBytes)) {
+    return json({ ok: false, message: "Only PDF or Word (.docx) files are accepted.", errors: { file: "This file is not a valid PDF or DOCX." } }, 422);
+  }
+
   const { stamp, folder, fileName } = makeNames(fields, file.name);
   const submission = {
     ref,
@@ -60,7 +65,7 @@ export async function POST(req: Request) {
     fileName,
     fileType: file.type,
     fileSize: file.size,
-    fileBytes: Buffer.from(await file.arrayBuffer()),
+    fileBytes,
   };
 
   if (mode === "local") {
