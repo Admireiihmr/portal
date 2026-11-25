@@ -26,7 +26,6 @@ export default function Footer() {
         <nav aria-label="Footer">
           <p className="ft-h">Explore</p>
           <a href="#guidelines">Guidelines</a>
-          <a href="#journey">How it works</a>
           <a href="#awards">Awards</a>
           <a href="#faq">FAQ</a>
         </nav>

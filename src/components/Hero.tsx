@@ -278,9 +278,6 @@ export default function Hero() {
               </defs>
             </svg>
           </h1>
-          <motion.p className="hero-sub" {...rise(0.3)}>
-            Foundation Day Idea Presentation
-          </motion.p>
           <motion.p className="hero-lead" {...rise(0.35)}>
             Have an idea that could improve healthcare? Submit a short abstract. Fifteen students will present to an expert panel on Foundation Day.
           </motion.p>

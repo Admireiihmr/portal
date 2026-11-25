@@ -8,6 +8,45 @@ import Tilt from "./Tilt";
 
 const ease = [0.2, 0.8, 0.2, 1] as const;
 
+/* guideline cards shown above the steps */
+const PRE_CARDS = [
+  {
+    tag: "Eligibility",
+    t: "All Students Eligible",
+    d: "Open to every IIHMR Bangalore student, first and second year, from every programme.",
+    art: (
+      <svg viewBox="0 0 120 90">
+        {[
+          { x: 24, s: 0.8 },
+          { x: 96, s: 0.8 },
+          { x: 60, s: 1 },
+        ].map((p) => (
+          <g key={p.x} transform={`translate(${p.x} 0) scale(${p.s}) translate(${-p.x} 0)`}>
+            <path d={`M${p.x - 20} 66c0-12 9-20 20-20s20 8 20 20z`} fill="url(#sV)" />
+            <circle cx={p.x} cy="34" r="11" fill="url(#sVl)" stroke="#9d84ff" strokeWidth="2" />
+            <path d={`M${p.x - 16} 20l16-7 16 7-16 7z`} fill="#4a33b2" />
+            <path d={`M${p.x + 13} 21v9`} stroke="#f8c533" strokeWidth="2.5" strokeLinecap="round" />
+          </g>
+        ))}
+      </svg>
+    ),
+  },
+  {
+    tag: "Entry",
+    t: "Individual Entry",
+    d: "One student, one idea, one presenter. You can list contributors; they are acknowledged.",
+    art: (
+      <svg viewBox="0 0 90 90">
+        <circle cx="45" cy="45" r="40" fill="url(#sVl)" stroke="#c9b8ff" strokeWidth="2" />
+        <circle cx="45" cy="36" r="13" fill="url(#sV)" />
+        <path d="M22 70c0-13 10-21 23-21s23 8 23 21z" fill="url(#sV)" />
+        <circle cx="68" cy="22" r="11" fill="url(#sGold)" filter="url(#sGlow)" />
+        <path d="M63 22l4 4 7-8" stroke="#fff" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+];
+
 /* shared gradients for the step illustrations (rendered once) */
 const Defs = () => (
   <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true">
@@ -130,7 +169,7 @@ export default function Steps() {
   const reduce = useReducedMotion();
   const inView = { once: true, margin: "-80px" } as const;
   return (
-    <section id="journey" className="st">
+    <section id="guidelines" className="st">
       <Defs />
       <span className="st-glow g1" aria-hidden />
       <span className="st-glow g2" aria-hidden />
@@ -144,7 +183,7 @@ export default function Steps() {
         <div className="st-head">
           <div>
             <motion.p className="st-label" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView} transition={{ duration: 0.6, ease }}>
-              How it works <i />
+              01 — Guidelines <i />
             </motion.p>
             {/* the trigger sits on the heading: the words start clipped, and clipped elements never count as in view */}
             <motion.h2 className="st-title" initial="hidden" whileInView="show" viewport={inView}>
@@ -155,7 +194,7 @@ export default function Steps() {
               </span>
             </motion.h2>
             <motion.p className="st-sub" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView} transition={{ delay: 0.2, duration: 0.6, ease }}>
-              Eight simple steps take you from your first idea to the Foundation Day stage.
+              Who can take part, then eight simple steps from your first idea to the Foundation Day stage.
             </motion.p>
           </div>
 
@@ -189,6 +228,30 @@ export default function Steps() {
             </svg>
             </Parallax>
           </motion.div>
+        </div>
+
+        {/* who can enter: two guideline cards, each as wide as two step cards */}
+        <div className="st-pre">
+          {PRE_CARDS.map((c, i) => (
+            <Tilt
+              as="article"
+              key={c.t}
+              className="st-card st-pre-card"
+              initial={{ opacity: 0, y: reduce ? 0 : 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={inView}
+              transition={{ duration: 0.6, delay: i * 0.1, ease }}
+            >
+              <span className="st-no">{c.tag}</span>
+              <div className="st-art" aria-hidden>
+                {c.art}
+              </div>
+              <div className="st-pre-text">
+                <h3>{c.t}</h3>
+                <p>{c.d}</p>
+              </div>
+            </Tilt>
+          ))}
         </div>
 
         <div className="st-grid">

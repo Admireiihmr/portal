@@ -31,11 +31,3 @@ export const FAQ = [
   { q: "Can I submit again if I made a mistake?", a: "Yes. Submit again with the same registration number and your files are kept together in your folder. The organisers will use the latest one." },
 ];
 
-// Guidelines (section 02): short points shown as neon glass cards. `glow` picks the card colour.
-export const GUIDELINES: { icon: string; title: string; note: string; glow: string }[] = [
-  { icon: "students", title: "All Students Eligible", note: "IIHMR Bangalore · 1st & 2nd year", glow: "violet" },
-  { icon: "person", title: "Individual Entry", note: "One student, one presenter", glow: "amber" },
-  { icon: "rocket", title: "Any Idea – Any Domain", note: "No fixed theme", glow: "cyan" },
-  { icon: "write", title: "Submit Abstract", note: "Any format, online", glow: "green" },
-  { icon: "media", title: "Present Your Idea", note: "PPT · Poster · Video", glow: "pink" },
-];

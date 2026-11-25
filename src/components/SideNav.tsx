@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 const ITEMS = [
   ["top", "Home"],
   ["guidelines", "Guidelines"],
-  ["journey", "Journey"],
   ["awards", "Awards"],
   ["submit", "Submit"],
   ["faq", "FAQ"],
