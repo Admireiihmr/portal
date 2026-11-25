@@ -722,4 +722,3 @@ img { display: block; max-width: 100%; }
 .hx { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 0 18px rgba(170, 140, 255, 0.45)); }
 @media (max-width: 1180px) { .hero-in { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); } .hero-hex { display: none; } }
 @media (max-width: 900px) { .hero-in { grid-template-columns: minmax(0, 1fr); } }
-#about { padding-bottom: clamp(48px, 6vw, 80px); }

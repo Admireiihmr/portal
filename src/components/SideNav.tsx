@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 const ITEMS = [
   ["top", "Home"],
-  ["about", "About"],
   ["guidelines", "Guidelines"],
   ["journey", "Journey"],
   ["awards", "Awards"],

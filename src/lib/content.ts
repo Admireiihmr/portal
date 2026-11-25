@@ -1,13 +1,3 @@
-export const TICKER_A = [
-  "Open theme",
-  "Individual entry",
-  "15 presenters",
-  "PPT, poster or video",
-  "IIHMR students",
-  "Submit online",
-  "Any format",
-  "Expert review",
-];
 export const PHOTOS: { src: string; caption: string; wide?: boolean }[] = [
   { src: "fd-16th.jpg", caption: "16th Foundation Day" },
   { src: "campus-entrance.jpg", caption: "IIHMR Bangalore campus", wide: true },
@@ -20,13 +10,6 @@ export const PHOTOS: { src: string; caption: string; wide?: boolean }[] = [
   { src: "library.jpg", caption: "The IIHMR library" },
 ];
 
-export const TICKER_B =["IIHMR Bangalore", "ADMIRE", "Foundation Day", "Your idea", "Digital health", "Innovation", "Impact"];
-
-export const STATS = [
-  { to: 15, suffix: "", label: "students present on stage" },
-  { to: 6, suffix: "", label: "awards to be won" },
-  { to: 7, suffix: " days", label: "submission window" },
-];
 
 export const STEPS = [
   { t: "Have an Idea", d: "Identify a relevant healthcare challenge and a creative solution." },

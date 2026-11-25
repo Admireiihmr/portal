@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Icon from "./Icon";
 
 const LINKS = [
-  ["About", "#about"],
   ["Guidelines", "#guidelines"],
   ["How it works", "#journey"],
   ["Awards", "#awards"],

@@ -260,7 +260,7 @@ export default function SubmitForm() {
       <SxScenery />
       <div className="wrap sx-grid">
         <Reveal from="left" className="sx-side">
-          <p className="sx-label">06 — Submit <i /></p>
+          <p className="sx-label">02 — Submit <i /></p>
           <motion.h2 className="sx-title" initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }}>
             <span className="hl">
               <motion.span variants={{ hidden: { y: "110%" }, show: { y: "0%", transition: { duration: 0.9, ease: [0.2, 0.8, 0.2, 1] } } }}>Submit Your</motion.span>

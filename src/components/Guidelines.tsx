@@ -72,7 +72,7 @@ export default function Guidelines() {
       <span className="gd-glow g1" aria-hidden />
       <span className="gd-glow g2" aria-hidden />
       <div className="wrap gd-inner">
-        <p className="gd-label">02 — Before you submit</p>
+        <p className="gd-label">01 — Before you submit</p>
 
         <div className="gd-head">
           <motion.div className="gd-bulb" initial={{ opacity: 0, y: reduce ? 0 : -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView} transition={{ duration: 0.8, ease }} aria-hidden>

@@ -94,7 +94,7 @@ export default function Faq() {
       <div className="wrap fq-grid">
         <div className="fq-left">
           <motion.p className="fq-label" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView} transition={{ duration: 0.6, ease }}>
-            07 — FAQ <i />
+            03 — FAQ <i />
           </motion.p>
           {/* the trigger sits on the heading: the words start clipped, and clipped elements never count as in view */}
           <motion.h2 className="fq-title" initial="hidden" whileInView="show" viewport={inView}>
