@@ -40,7 +40,7 @@ export default function Footer() {
             </span>
           </p>
           <a href="#submit" className="btn btn-primary footer-cta">
-            <Icon name="send" size={16} /> Submit Your Abstract <Icon name="arrow" size={16} />
+            <Icon name="send" size={16} /> Submit Your Prototype <Icon name="arrow" size={16} />
           </a>
         </div>
       </div>

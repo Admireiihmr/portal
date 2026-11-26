@@ -73,7 +73,7 @@ export async function POST(req: Request) {
       await saveSubmission(mode, submission);
     } catch (err) {
       console.error("[submit] storage failed:", err instanceof Error ? err.message : err);
-      return json({ ok: false, message: "We could not save your abstract. Please try again in a moment." }, 502);
+      return json({ ok: false, message: "We could not save your prototype. Please try again in a moment." }, 502);
     }
     return json({ ok: true, ref });
   }

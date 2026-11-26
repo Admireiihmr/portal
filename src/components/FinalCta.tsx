@@ -68,12 +68,12 @@ export default function FinalCta() {
               </svg>
             </h2>
             <p className="fc-text">
-              Submit your abstract in a couple of minutes. <b>Deadline:</b> {DEADLINE_TEXT}.
+              Submit your prototype in a couple of minutes. <b>Deadline:</b> {DEADLINE_TEXT}.
             </p>
             <div className="fc-actions">
               <Magnetic>
                 <a href="#submit" className="btn btn-primary btn-lg">
-                  <Icon name="send" size={18} /> Submit Your Abstract <Icon name="arrow" size={18} />
+                  <Icon name="send" size={18} /> Submit Your Prototype <Icon name="arrow" size={18} />
                 </a>
               </Magnetic>
               <span className="fc-div" aria-hidden />

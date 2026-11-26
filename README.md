@@ -1,12 +1,12 @@
 # Foundation Day Idea Presentation – student portal
 
-Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch and an abstract file (PDF or DOCX only)**. Each submission is saved to Google Drive in **one folder per student**.
+Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch, a prototype link and a prototype file (PDF or DOCX only)**. Each submission is saved to Google Drive in **one folder per student**.
 
 ```
 <your Drive folder>/
   IIH2401_Asha Rao/
-    20261119-1028_My Abstract final.pdf      ← the uploaded abstract
-    20261119-1028_details.txt                ← name, reg no., e-mail, branch, title, contributors
+    20261119-1028_My Prototype final.pdf      ← the uploaded prototype
+    20261119-1028_details.txt                ← name, reg no., e-mail, branch, title, contributors, prototype link
   IIH2402_Meera Nair/
     ...
 ```
@@ -38,7 +38,7 @@ A website cannot write into a Drive folder just because it has the folder link, 
    GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/XXXXXXXX/exec
    ```
    `GOOGLE_SCRIPT_SECRET` is already there and matches the script.
-6. Restart the site and submit a test abstract. A folder named like `IIH2401_Asha Rao` appears in your Drive folder within a few seconds.
+6. Restart the site and submit a test prototype. A folder named like `IIH2401_Asha Rao` appears in your Drive folder within a few seconds.
 
 **If you change the script later:** *Deploy → Manage deployments → ✏ → Version: New version → Deploy*. The URL stays the same.
 
@@ -57,7 +57,7 @@ A website cannot write into a Drive folder just because it has the folder link, 
 | `GOOGLE_SCRIPT_URL` / `GOOGLE_SCRIPT_SECRET` | Where to send submissions (see above) |
 | `NEXT_PUBLIC_SUBMISSIONS_OPEN` | `false` shows "Submissions open soon" instead of the form |
 | `NEXT_PUBLIC_DEADLINE_TEXT` | Text shown as the deadline, e.g. `7 December 2026, 5 pm` |
-| `NEXT_PUBLIC_MAX_FILE_MB` | Max abstract size (default 25) |
+| `NEXT_PUBLIC_MAX_FILE_MB` | Max prototype size (default 25) |
 | `ALLOW_LOCAL_STORAGE` | `true` lets a single self-hosted server save to its own disk |
 
 Branches and the allowed file types (PDF, DOCX) are in `src/lib/config.ts`. Page text is in `src/lib/content.ts`.
@@ -78,7 +78,7 @@ The site is live at https://portal-virid-chi-54.vercel.app/. In the Vercel proje
 
 Then redeploy. Without the first two, the live form shows "Submissions are not available".
 
-Vercel accepts about 4.5 MB per request, so on Vercel the abstract limit defaults to **4 MB** (set `NEXT_PUBLIC_MAX_FILE_MB` to change it; going above 4 will fail there).
+Vercel accepts about 4.5 MB per request, so on Vercel the prototype limit defaults to **4 MB** (set `NEXT_PUBLIC_MAX_FILE_MB` to change it; going above 4 will fail there).
 
 ## Deploying elsewhere
 

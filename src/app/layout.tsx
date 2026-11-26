@@ -9,7 +9,7 @@ const body = Inter({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
   title: "Foundation Day Idea Presentation | IIHMR Bangalore",
-  description: "Submit your abstract and pitch your idea on stage at the IIHMR Bangalore Foundation Day. Organised with ADMIRE, the Center for Advancing Digital Health.",
+  description: "Submit your prototype and pitch your idea on stage at the IIHMR Bangalore Foundation Day. Organised with ADMIRE, the Center for Advancing Digital Health.",
   icons: { icon: "/images/iihmr.png" },
 };
 export const viewport: Viewport = { themeColor: "#120f24", width: "device-width", initialScale: 1 };

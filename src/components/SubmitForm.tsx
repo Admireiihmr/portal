@@ -149,7 +149,7 @@ function SxScenery() {
 }
 
 export default function SubmitForm() {
-  const [v, setV] = useState({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", website: "" });
+  const [v, setV] = useState({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", link: "", website: "" });
   const [consent, setConsent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -196,6 +196,7 @@ export default function SubmitForm() {
     fd.set("branch", fields.branch);
     fd.set("title", fields.title);
     fd.set("collaborators", fields.collaborators);
+    fd.set("link", fields.link);
     fd.set("consent", "on");
     fd.set("website", v.website);
     fd.set("file", file);
@@ -230,7 +231,7 @@ export default function SubmitForm() {
   }
 
   function reset() {
-    setV({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", website: "" });
+    setV({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", link: "", website: "" });
     setConsent(false);
     setFile(null);
     setErrors({});
@@ -267,18 +268,18 @@ export default function SubmitForm() {
             </span>
             <span className="hl">
               <motion.span className="grad" variants={{ hidden: { y: "110%" }, show: { y: "0%", transition: { delay: 0.1, duration: 0.9, ease: [0.2, 0.8, 0.2, 1] } } }}>
-                Abstract
+                Prototype
               </motion.span>
             </span>
             <HeartPulse />
           </motion.h2>
-          <p className="sx-lead">Turn your idea into impact. Fill in the form and upload your abstract to participate in Foundation Day.</p>
+          <p className="sx-lead">Turn your idea into impact. Fill in the form and upload your prototype to participate in Foundation Day.</p>
           <ul className="sx-list">
             <li>
               <span className="sx-li-ic"><Icon name="user" size={18} /></span>Individual entry, one presenter
             </li>
             <li>
-              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme · abstract in PDF or DOCX
+              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme · prototype in PDF or DOCX
             </li>
             <li>
               <span className="sx-li-ic"><Icon name="cloudUpload" size={18} /></span>Up to {MAX_FILE_MB} MB per file
@@ -312,8 +313,8 @@ export default function SubmitForm() {
                     <motion.circle cx="26" cy="26" r="24" fill="none" stroke="#15803d" strokeWidth="3" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.6 }} />
                     <motion.path d="M14 27l8 8 16-17" fill="none" stroke="#15803d" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.5 }} />
                   </motion.svg>
-                  <h3>Abstract received!</h3>
-                  <p>Thank you. Your abstract and details are saved in your own folder.</p>
+                  <h3>Prototype received!</h3>
+                  <p>Thank you. Your prototype and details are saved in your own folder.</p>
                   <div className="refbox">
                     <span>Your reference</span>
                     <b>{ref}</b>
@@ -374,7 +375,7 @@ export default function SubmitForm() {
                   </Field>
 
                   <Field icon="clip">
-                    <span className="lbl">Abstract *</span>
+                    <span className="lbl">Prototype *</span>
                     <div
                       className={`drop ${drag ? "drag" : ""} ${errors.file ? "bad" : ""}`}
                       onDragOver={(e) => {
@@ -413,6 +414,12 @@ export default function SubmitForm() {
                     <Err k="file" />
                   </Field>
 
+                  <Field icon="link">
+                    <label htmlFor="link">Prototype link *</label>
+                    <input id="link" type="url" inputMode="url" autoComplete="off" placeholder="https://… link to your prototype" value={v.link} onChange={set("link")} {...aria("link")} />
+                    <Err k="link" />
+                  </Field>
+
                   {/* honeypot: real people never see this */}
                   <div className="hp" aria-hidden="true">
                     <label>
@@ -437,7 +444,7 @@ export default function SubmitForm() {
                     </div>
                     <motion.button className="btn btn-primary btn-lg sx-submit" disabled={status === "sending"} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                       <Icon name="send" size={18} />
-                      {status === "sending" ? `Uploading… ${progress}%` : "Submit Abstract"}
+                      {status === "sending" ? `Uploading… ${progress}%` : "Submit Prototype"}
                       {status !== "sending" && <Icon name="arrow" size={18} />}
                     </motion.button>
                   </div>

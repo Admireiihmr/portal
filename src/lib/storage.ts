@@ -47,7 +47,7 @@ export function makeNames(fields: Fields, originalName: string, now = new Date()
 export function detailsText(s: Submission) {
   const f = s.fields;
   return [
-    `${EVENT.name} - abstract submission`,
+    `${EVENT.name} - prototype submission`,
     `Reference:        ${s.ref}`,
     `Submitted (IST):  ${s.stamp}`,
     ``,
@@ -58,7 +58,8 @@ export function detailsText(s: Submission) {
     `Idea title:       ${f.title}`,
     `Contributors:     ${f.collaborators || "-"} (acknowledgement only; the student above is the sole presenter)`,
     ``,
-    `Abstract file:    ${s.fileName} (${(s.fileSize / 1024).toFixed(1)} KB, ${s.fileType || "unknown type"})`,
+    `Prototype link:   ${f.link}`,
+    `Prototype file:   ${s.fileName} (${(s.fileSize / 1024).toFixed(1)} KB, ${s.fileType || "unknown type"})`,
     ``,
   ].join("\r\n");
 }
@@ -83,7 +84,7 @@ async function saveLocal(s: Submission) {
 
 /* ───────────── Google Drive via the Apps Script web app ───────────── */
 // The script (google-apps-script/Code.gs) runs as the Drive owner, so no Google Cloud project or admin consent is needed.
-// It creates the student's folder inside the shared folder if it is missing, then saves the abstract and a details file.
+// It creates the student's folder inside the shared folder if it is missing, then saves the prototype and a details file.
 async function saveToDrive(s: Submission) {
   const res = await fetch(process.env.GOOGLE_SCRIPT_URL!, {
     method: "POST",

@@ -7,6 +7,7 @@ export type Fields = {
   branch: string;
   title: string;
   collaborators: string;
+  link: string;
   consent: boolean;
 };
 export type FieldErrors = Partial<Record<keyof Fields | "file", string>>;
@@ -23,6 +24,18 @@ export function extFor(filename: string) {
   return i > -1 ? filename.slice(i + 1).toLowerCase() : "";
 }
 
+export const MAX_LINK_LENGTH = 500;
+
+/** A full web address: http or https only, with a real-looking host name and no spaces. */
+export function isWebLink(s: string) {
+  if (/\s/.test(s) || !/^https?:\/\//i.test(s)) return false;
+  try {
+    return new URL(s).hostname.includes(".");
+  } catch {
+    return false;
+  }
+}
+
 /** Shared by the browser form and the API route. */
 export function validateFields(f: Fields): FieldErrors {
   const errors: FieldErrors = {};
@@ -32,12 +45,15 @@ export function validateFields(f: Fields): FieldErrors {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email)) errors.email = "Enter a valid e-mail address.";
   if (!(BRANCHES as readonly string[]).includes(f.branch)) errors.branch = "Choose your branch.";
   if (f.title.length < 4) errors.title = "Give your idea a short title.";
+  if (!f.link) errors.link = "Enter the link to your prototype.";
+  else if (f.link.length > MAX_LINK_LENGTH) errors.link = `This link is too long. Maximum is ${MAX_LINK_LENGTH} characters.`;
+  else if (!isWebLink(f.link)) errors.link = "Enter a full link that starts with https:// or http://";
   if (!f.consent) errors.consent = "Please confirm to continue.";
   return errors;
 }
 
 export function validateFile(file: { name: string; size: number } | null): string | undefined {
-  if (!file || file.size === 0) return "Attach your abstract.";
+  if (!file || file.size === 0) return "Attach your prototype.";
   if (file.size > MAX_FILE_MB * 1024 * 1024) return `File is too large. Maximum is ${MAX_FILE_MB} MB.`;
   if (!ALLOWED_EXTENSIONS.includes(extFor(file.name))) return "Only PDF or Word (.docx) files are accepted.";
   return undefined;
@@ -59,6 +75,7 @@ export function normalise(raw: {
   branch?: unknown;
   title?: unknown;
   collaborators?: unknown;
+  link?: unknown;
   consent?: unknown;
 }): Fields {
   return {
@@ -68,6 +85,8 @@ export function normalise(raw: {
     branch: clean(raw.branch, 80),
     title: clean(raw.title, 150),
     collaborators: clean(raw.collaborators, 200),
+    // one extra character is kept so an over-long link is rejected instead of being silently cut
+    link: clean(raw.link, MAX_LINK_LENGTH + 1),
     consent: raw.consent === true || raw.consent === "on" || raw.consent === "true",
   };
 }
@@ -80,6 +99,7 @@ export function parseAndValidate(fd: FormData): { fields: Fields; file: File | n
     branch: fd.get("branch"),
     title: fd.get("title"),
     collaborators: fd.get("collaborators"),
+    link: fd.get("link"),
     consent: fd.get("consent"),
   });
   const f = fd.get("file");

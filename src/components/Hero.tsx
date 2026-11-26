@@ -279,12 +279,12 @@ export default function Hero() {
             </svg>
           </h1>
           <motion.p className="hero-lead" {...rise(0.35)}>
-            Have an idea that could improve healthcare? Submit a short abstract. Fifteen students will present to an expert panel on Foundation Day.
+            Have an idea that could improve healthcare? Submit a short prototype. Fifteen students will present to an expert panel on Foundation Day.
           </motion.p>
           <motion.div className="hero-cta" {...rise(0.45)}>
             <Magnetic>
               <a href="#submit" className="btn btn-primary btn-lg">
-                <Icon name="send" size={17} /> Submit Your Abstract <Icon name="arrow" size={17} />
+                <Icon name="send" size={17} /> Submit Your Prototype <Icon name="arrow" size={17} />
               </a>
             </Magnetic>
             <Magnetic>

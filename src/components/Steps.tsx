@@ -91,7 +91,7 @@ const ART = [
     <circle cx="60" cy="42" r="12" fill="url(#sGold)" filter="url(#sGlow)" />
     <rect x="55" y="53" width="10" height="7" rx="2" fill="#c9bcff" />
   </svg>,
-  // 02 abstract: document with a pencil
+  // 02 prototype: document with a pencil
   <svg viewBox="0 0 120 90" key="2">
     <rect x="30" y="8" width="54" height="72" rx="6" fill="url(#sVl)" stroke="#b9a6ff" strokeWidth="2" />
     <rect x="39" y="20" width="30" height="5" rx="2.5" fill="#6a4ce0" />

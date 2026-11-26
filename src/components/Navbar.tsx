@@ -41,7 +41,7 @@ export default function Navbar() {
           ))}
         </nav>
         <a href="#submit" className="btn btn-primary nav-cta">
-          Submit abstract
+          Submit prototype
         </a>
         <button className="burger" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen((o) => !o)}>
           <Icon name={open ? "close" : "menu"} />
@@ -74,7 +74,7 @@ export default function Navbar() {
               ))}
             </nav>
             <a href="#submit" className="btn btn-primary btn-lg full" onClick={() => setOpen(false)}>
-              Submit your abstract
+              Submit your prototype
             </a>
             <p className="sheet-note">
               Questions? <a href="mailto:admire@iihmrbangalore.edu.in">admire@iihmrbangalore.edu.in</a>
