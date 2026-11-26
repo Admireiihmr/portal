@@ -44,9 +44,9 @@ export function validateFields(f: Fields): FieldErrors {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email)) errors.email = "Enter a valid e-mail address.";
   if (!(BRANCHES as readonly string[]).includes(f.branch)) errors.branch = "Choose your branch.";
   if (f.title.length < 4) errors.title = "Give your idea a short title.";
-  // the link is optional, but must be valid when given
-  if (f.link.length > MAX_LINK_LENGTH) errors.link = `This link is too long. Maximum is ${MAX_LINK_LENGTH} characters.`;
-  else if (f.link && !isWebLink(f.link)) errors.link = "Enter a full link that starts with https:// or http://";
+  if (!f.link) errors.link = "Enter the link to your prototype.";
+  else if (f.link.length > MAX_LINK_LENGTH) errors.link = `This link is too long. Maximum is ${MAX_LINK_LENGTH} characters.`;
+  else if (!isWebLink(f.link)) errors.link = "Enter a full link that starts with https:// or http://";
   if (!f.consent) errors.consent = "Please confirm to continue.";
   return errors;
 }

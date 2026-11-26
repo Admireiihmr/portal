@@ -1,6 +1,6 @@
 # Foundation Day Idea Presentation – student portal
 
-Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch, an abstract file (PDF, DOCX or image) and an optional prototype link**. Each submission is saved to Google Drive in **one folder per student**.
+Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch, an abstract file (PDF, DOCX or image) and a prototype link**. Each submission is saved to Google Drive in **one folder per student**.
 
 ```
 <your Drive folder>/
@@ -73,6 +73,7 @@ The site is live at https://portal-virid-chi-54.vercel.app/. In the Vercel proje
 | --- | --- |
 | `GOOGLE_SCRIPT_URL` | the Apps Script Web app URL (ends in `/exec`) |
 | `GOOGLE_SCRIPT_SECRET` | the same secret you put in the script |
+
 Then redeploy. Without the first two, the live form shows "Submissions are not available".
 
 Vercel accepts about 4.5 MB per request, so on Vercel the prototype limit defaults to **4 MB** (set `NEXT_PUBLIC_MAX_FILE_MB` to change it; going above 4 will fail there).
