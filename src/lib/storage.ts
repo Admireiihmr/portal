@@ -59,10 +59,7 @@ export function detailsText(s: Submission) {
     `Contributors:     ${f.collaborators || "-"} (acknowledgement only; the student above is the sole presenter)`,
     ``,
     `Prototype link:   ${f.link || "-"}`,
-    `Prototype file:   ${s.fileName} (${(s.fileSize / 1024).toFixed(1)} KB, ${s.fileType || "unknown type"})`,
-    ``,
-    `Description:`,
-    f.description.replace(/\n/g, "\r\n"),
+    `Abstract file:    ${s.fileName} (${(s.fileSize / 1024).toFixed(1)} KB, ${s.fileType || "unknown type"})`,
     ``,
   ].join("\r\n");
 }

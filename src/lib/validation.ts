@@ -6,7 +6,6 @@ export type Fields = {
   email: string;
   branch: string;
   title: string;
-  description: string;
   collaborators: string;
   link: string;
   consent: boolean;
@@ -26,21 +25,6 @@ export function extFor(filename: string) {
 }
 
 export const MAX_LINK_LENGTH = 500;
-export const MAX_DESCRIPTION_WORDS = 500;
-// A safety cap as well, so one enormous "word" cannot get through the word limit
-export const MAX_DESCRIPTION_LENGTH = 6000;
-
-export const countWords = (s: string) => s.split(/\s+/).filter(Boolean).length;
-
-/** Like clean(), but keeps line breaks so paragraphs survive. */
-export const cleanMultiline = (v: unknown, max: number) =>
-  (typeof v === "string" ? v : "")
-    .replace(/\r\n?/g, "\n")
-    .replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, " ")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim()
-    .slice(0, max);
-
 /** A full web address: http or https only, with a real-looking host name and no spaces. */
 export function isWebLink(s: string) {
   if (/\s/.test(s) || !/^https?:\/\//i.test(s)) return false;
@@ -60,9 +44,6 @@ export function validateFields(f: Fields): FieldErrors {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email)) errors.email = "Enter a valid e-mail address.";
   if (!(BRANCHES as readonly string[]).includes(f.branch)) errors.branch = "Choose your branch.";
   if (f.title.length < 4) errors.title = "Give your idea a short title.";
-  if (!f.description) errors.description = "Describe your idea.";
-  else if (countWords(f.description) > MAX_DESCRIPTION_WORDS) errors.description = `Keep your description to ${MAX_DESCRIPTION_WORDS} words or fewer.`;
-  else if (f.description.length > MAX_DESCRIPTION_LENGTH) errors.description = `Your description is too long. Maximum is ${MAX_DESCRIPTION_LENGTH} characters.`;
   // the link is optional, but must be valid when given
   if (f.link.length > MAX_LINK_LENGTH) errors.link = `This link is too long. Maximum is ${MAX_LINK_LENGTH} characters.`;
   else if (f.link && !isWebLink(f.link)) errors.link = "Enter a full link that starts with https:// or http://";
@@ -71,7 +52,7 @@ export function validateFields(f: Fields): FieldErrors {
 }
 
 export function validateFile(file: { name: string; size: number } | null): string | undefined {
-  if (!file || file.size === 0) return "Attach your prototype.";
+  if (!file || file.size === 0) return "Attach your abstract.";
   if (file.size > MAX_FILE_MB * 1024 * 1024) return `File is too large. Maximum is ${MAX_FILE_MB} MB.`;
   if (!ALLOWED_EXTENSIONS.includes(extFor(file.name))) return "Only PDF, Word (.docx) or image files are accepted.";
   return undefined;
@@ -112,7 +93,6 @@ export function normalise(raw: {
   email?: unknown;
   branch?: unknown;
   title?: unknown;
-  description?: unknown;
   collaborators?: unknown;
   link?: unknown;
   consent?: unknown;
@@ -123,7 +103,6 @@ export function normalise(raw: {
     email: clean(raw.email, 120).toLowerCase(),
     branch: clean(raw.branch, 80),
     title: clean(raw.title, 150),
-    description: cleanMultiline(raw.description, MAX_DESCRIPTION_LENGTH + 1),
     collaborators: clean(raw.collaborators, 200),
     // one extra character is kept so an over-long link is rejected instead of being silently cut
     link: clean(raw.link, MAX_LINK_LENGTH + 1),
@@ -138,7 +117,6 @@ export function parseAndValidate(fd: FormData): { fields: Fields; file: File | n
     email: fd.get("email"),
     branch: fd.get("branch"),
     title: fd.get("title"),
-    description: fd.get("description"),
     collaborators: fd.get("collaborators"),
     link: fd.get("link"),
     consent: fd.get("consent"),

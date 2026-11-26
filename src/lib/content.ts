@@ -13,7 +13,7 @@ export const PHOTOS: { src: string; caption: string; wide?: boolean }[] = [
 
 export const STEPS = [
   { t: "Have an Idea", d: "Identify a relevant healthcare challenge and a creative solution." },
-  { t: "Submit Your Prototype", d: "Fill in your details and upload your prototype." },
+  { t: "Submit Your Prototype", d: "Fill in your details and upload your abstract." },
   { t: "Initial Screening", d: "Submissions are checked for completeness and eligibility." },
   { t: "Expert Review", d: "Domain experts evaluate each prototype and select the best ideas." },
   { t: "Shortlist of 15", d: "The top 15 ideas are selected to present on Foundation Day." },
@@ -25,7 +25,7 @@ export const STEPS = [
 export const FAQ = [
   { q: "Who can take part?", a: "Any current IIHMR Bangalore student, first or second year. The event is not open to external participants." },
   { q: "Can I submit as a team?", a: "No. Entries are individual and there is a single presenter. You can list your contributors and they will be acknowledged, but the certificate is issued only in the presenter's name." },
-  { q: "What should my prototype contain?", a: "A short description of the problem, your idea, how it works and the impact you expect. A page or two is enough, saved as a PDF, Word (.docx) or image file." },
+  { q: "What should my abstract contain?", a: "A short description of the problem, your idea, how it works and the impact you expect. A page or two is enough, saved as a PDF, Word (.docx) or image file." },
   { q: "Which file formats are accepted?", a: "PDF (.pdf), Word (.docx) and images (JPG, PNG, GIF, WEBP, BMP, TIFF, SVG, HEIC, HEIF, AVIF and ICO). Other formats such as PowerPoint, older .doc files or videos are not accepted. The size limit is shown on the form." },
   { q: "How will I know if I am shortlisted?", a: "We will e-mail the address you give in the form, so please double-check it." },
   { q: "Can I submit again if I made a mistake?", a: "Yes. Submit again with the same registration number and your files are kept together in your folder. The organisers will use the latest one." },

@@ -5,8 +5,8 @@
  * as the owner of the Drive folder, then deploy it as a Web app (see README.md, "Connect Google Drive").
  *
  * For every submission it creates (or reuses) one sub-folder per student inside FOLDER_ID and saves
- *   - the uploaded prototype
- *   - a details text file (name, registration no., e-mail, branch, title, contributors, prototype link, description)
+ *   - the uploaded abstract
+ *   - a details text file (name, registration no., e-mail, branch, title, contributors, prototype link)
  */
 
 // The Drive folder that receives one sub-folder per student

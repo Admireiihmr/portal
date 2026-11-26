@@ -3,7 +3,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState, type DragEvent, type FormEvent, type ReactNode } from "react";
 import { ACCEPT_ATTR, BRANCHES, DEADLINE_TEXT, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
-import { countWords, MAX_DESCRIPTION_WORDS, normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
+import { normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
 
@@ -149,7 +149,7 @@ function SxScenery() {
 }
 
 export default function SubmitForm() {
-  const [v, setV] = useState({ name: "", regNo: "", email: "", branch: "", title: "", description: "", collaborators: "", link: "", website: "" });
+  const [v, setV] = useState({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", link: "", website: "" });
   const [consent, setConsent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -195,7 +195,6 @@ export default function SubmitForm() {
     fd.set("email", fields.email);
     fd.set("branch", fields.branch);
     fd.set("title", fields.title);
-    fd.set("description", fields.description);
     fd.set("collaborators", fields.collaborators);
     fd.set("link", fields.link);
     fd.set("consent", "on");
@@ -232,7 +231,7 @@ export default function SubmitForm() {
   }
 
   function reset() {
-    setV({ name: "", regNo: "", email: "", branch: "", title: "", description: "", collaborators: "", link: "", website: "" });
+    setV({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", link: "", website: "" });
     setConsent(false);
     setFile(null);
     setErrors({});
@@ -246,7 +245,6 @@ export default function SubmitForm() {
         {errors[k]}
       </small>
     ) : null;
-  const words = countWords(v.description);
   const aria = (k: keyof FieldErrors) =>({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `e-${k}` : undefined });
 
   return (
@@ -275,13 +273,13 @@ export default function SubmitForm() {
             </span>
             <HeartPulse />
           </motion.h2>
-          <p className="sx-lead">Turn your idea into impact. Fill in the form and upload your prototype to participate in Foundation Day.</p>
+          <p className="sx-lead">Turn your idea into impact. Fill in the form and upload your abstract to participate in Foundation Day.</p>
           <ul className="sx-list">
             <li>
               <span className="sx-li-ic"><Icon name="user" size={18} /></span>Individual entry, one presenter
             </li>
             <li>
-              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme · prototype as PDF, DOCX or image
+              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme · abstract as PDF, DOCX or image
             </li>
             <li>
               <span className="sx-li-ic"><Icon name="cloudUpload" size={18} /></span>Up to {MAX_FILE_MB} MB per file
@@ -316,7 +314,7 @@ export default function SubmitForm() {
                     <motion.path d="M14 27l8 8 16-17" fill="none" stroke="#15803d" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.5 }} />
                   </motion.svg>
                   <h3>Prototype received!</h3>
-                  <p>Thank you. Your prototype and details are saved in your own folder.</p>
+                  <p>Thank you. Your abstract and details are saved in your own folder.</p>
                   <div className="refbox">
                     <span>Your reference</span>
                     <b>{ref}</b>
@@ -371,22 +369,13 @@ export default function SubmitForm() {
                     <Err k="title" />
                   </Field>
 
-                  <Field icon="file">
-                    <label htmlFor="description">Description *</label>
-                    <textarea id="description" rows={8} placeholder={`Describe your idea in up to ${MAX_DESCRIPTION_WORDS} words`} value={v.description} onChange={set("description")} {...aria("description")} />
-                    <small className={words > MAX_DESCRIPTION_WORDS ? "err" : "count"}>
-                      {words} / {MAX_DESCRIPTION_WORDS} words
-                    </small>
-                    <Err k="description" />
-                  </Field>
-
                   <Field icon="users">
                     <label htmlFor="collab">Contributors (if any)</label>
                     <input id="collab" placeholder="Enter contributor names, if any" value={v.collaborators} onChange={set("collaborators")} />
                   </Field>
 
                   <Field icon="clip">
-                    <span className="lbl">Prototype *</span>
+                    <span className="lbl">Abstract *</span>
                     <div
                       className={`drop ${drag ? "drag" : ""} ${errors.file ? "bad" : ""}`}
                       onDragOver={(e) => {

@@ -1,12 +1,12 @@
 # Foundation Day Idea Presentation – student portal
 
-Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch, a description (up to 500 words), a prototype file (PDF, DOCX or image) and an optional prototype link**. Each submission is saved to Google Drive in **one folder per student**.
+Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch, an abstract file (PDF, DOCX or image) and an optional prototype link**. Each submission is saved to Google Drive in **one folder per student**.
 
 ```
 <your Drive folder>/
   IIH2401_Asha Rao/
-    20261119-1028_My Prototype final.pdf      ← the uploaded prototype
-    20261119-1028_details.txt                ← name, reg no., e-mail, branch, title, contributors, prototype link, description
+    20261119-1028_My Abstract final.pdf       ← the uploaded abstract
+    20261119-1028_details.txt                ← name, reg no., e-mail, branch, title, contributors, prototype link
   IIH2402_Meera Nair/
     ...
 ```
