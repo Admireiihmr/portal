@@ -426,7 +426,7 @@ export default function SubmitForm() {
                   </Field>
 
                   <Field icon="link">
-                    <label htmlFor="link">Prototype link (optional)</label>
+                    <label htmlFor="link">Prototype link</label>
                     <input id="link" type="url" inputMode="url" autoComplete="off" placeholder="https://… link to your prototype" value={v.link} onChange={set("link")} {...aria("link")} />
                     <Err k="link" />
                   </Field>
