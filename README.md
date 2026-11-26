@@ -56,11 +56,10 @@ A website cannot write into a Drive folder just because it has the folder link, 
 | --- | --- |
 | `GOOGLE_SCRIPT_URL` / `GOOGLE_SCRIPT_SECRET` | Where to send submissions (see above) |
 | `NEXT_PUBLIC_SUBMISSIONS_OPEN` | `false` shows "Submissions open soon" instead of the form |
-| `NEXT_PUBLIC_DEADLINE_TEXT` | Text shown as the deadline, e.g. `7 December 2026, 5 pm` |
 | `NEXT_PUBLIC_MAX_FILE_MB` | Max prototype size (default 25) |
 | `ALLOW_LOCAL_STORAGE` | `true` lets a single self-hosted server save to its own disk |
 
-Branches and the allowed file types (PDF, DOCX, images) are in `src/lib/config.ts`. Page text is in `src/lib/content.ts`.
+Branches and the allowed file types (PDF, DOCX, images) are in `src/lib/config.ts`, as is the deadline text (`DEADLINE_TEXT`). Page text is in `src/lib/content.ts`.
 
 ## Hero photo
 
@@ -74,8 +73,6 @@ The site is live at https://portal-virid-chi-54.vercel.app/. In the Vercel proje
 | --- | --- |
 | `GOOGLE_SCRIPT_URL` | the Apps Script Web app URL (ends in `/exec`) |
 | `GOOGLE_SCRIPT_SECRET` | the same secret you put in the script |
-| `NEXT_PUBLIC_DEADLINE_TEXT` | e.g. `7 December 2026, 5 pm` (optional) |
-
 Then redeploy. Without the first two, the live form shows "Submissions are not available".
 
 Vercel accepts about 4.5 MB per request, so on Vercel the prototype limit defaults to **4 MB** (set `NEXT_PUBLIC_MAX_FILE_MB` to change it; going above 4 will fail there).

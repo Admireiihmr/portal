@@ -24,4 +24,5 @@ export const ACCEPT_ATTR = [
 ].join(",");
 
 export const SUBMISSIONS_OPEN = (process.env.NEXT_PUBLIC_SUBMISSIONS_OPEN ?? "true") !== "false";
-export const DEADLINE_TEXT = process.env.NEXT_PUBLIC_DEADLINE_TEXT ?? "9 December 2026";
+// Set here on purpose (no environment variable), so an old hosting setting cannot override the date.
+export const DEADLINE_TEXT = "9 December 2026";
