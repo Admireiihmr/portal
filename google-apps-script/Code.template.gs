@@ -6,7 +6,7 @@
  *
  * For every submission it creates (or reuses) one sub-folder per student inside FOLDER_ID and saves
  *   - the uploaded prototype
- *   - a details text file (name, registration no., e-mail, branch, title, contributors, prototype link)
+ *   - a details text file (name, registration no., e-mail, branch, title, contributors, prototype link, description)
  */
 
 // The Drive folder that receives one sub-folder per student

@@ -1,12 +1,12 @@
 # Foundation Day Idea Presentation – student portal
 
-Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch, a prototype link and a prototype file (PDF or DOCX only)**. Each submission is saved to Google Drive in **one folder per student**.
+Next.js site for IIHMR Bangalore / ADMIRE. Students read the rules, then submit **name, registration no., branch, a description (up to 500 words), a prototype file (PDF, DOCX or image) and an optional prototype link**. Each submission is saved to Google Drive in **one folder per student**.
 
 ```
 <your Drive folder>/
   IIH2401_Asha Rao/
     20261119-1028_My Prototype final.pdf      ← the uploaded prototype
-    20261119-1028_details.txt                ← name, reg no., e-mail, branch, title, contributors, prototype link
+    20261119-1028_details.txt                ← name, reg no., e-mail, branch, title, contributors, prototype link, description
   IIH2402_Meera Nair/
     ...
 ```
@@ -60,7 +60,7 @@ A website cannot write into a Drive folder just because it has the folder link, 
 | `NEXT_PUBLIC_MAX_FILE_MB` | Max prototype size (default 25) |
 | `ALLOW_LOCAL_STORAGE` | `true` lets a single self-hosted server save to its own disk |
 
-Branches and the allowed file types (PDF, DOCX) are in `src/lib/config.ts`. Page text is in `src/lib/content.ts`.
+Branches and the allowed file types (PDF, DOCX, images) are in `src/lib/config.ts`. Page text is in `src/lib/content.ts`.
 
 ## Hero photo
 
@@ -88,7 +88,7 @@ Vercel accepts about 4.5 MB per request, so on Vercel the prototype limit defaul
 
 ## Safety built in
 
-* Server-side validation of every field and the file: only PDF (`.pdf`) and Word (`.docx`) are accepted, and the file contents are checked so a renamed file is rejected.
+* Server-side validation of every field and the file: only PDF (`.pdf`), Word (`.docx`) and image files are accepted, and the file contents are checked so a renamed file is rejected.
 * Folder and file names are sanitised, so a student cannot write outside their own folder.
 * Hidden honeypot field plus per-IP and per-registration-number rate limits.
 * The Drive script only answers requests that carry the shared secret, and the secret never reaches the browser.

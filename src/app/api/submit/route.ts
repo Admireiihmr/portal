@@ -53,7 +53,7 @@ export async function POST(req: Request) {
   const ref = "FD26-" + randomBytes(4).toString("hex").slice(0, 6).toUpperCase();
   const fileBytes = Buffer.from(await file.arrayBuffer());
   if (!looksLikeAllowedFile(file.name, fileBytes)) {
-    return json({ ok: false, message: "Only PDF or Word (.docx) files are accepted.", errors: { file: "This file is not a valid PDF or DOCX." } }, 422);
+    return json({ ok: false, message: "Only PDF, Word (.docx) or image files are accepted.", errors: { file: "This file is not a valid PDF, DOCX or image." } }, 422);
   }
 
   const { stamp, folder, fileName } = makeNames(fields, file.name);

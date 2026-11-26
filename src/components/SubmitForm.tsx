@@ -3,7 +3,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState, type DragEvent, type FormEvent, type ReactNode } from "react";
 import { ACCEPT_ATTR, BRANCHES, DEADLINE_TEXT, MAX_FILE_MB, SUBMISSIONS_OPEN } from "@/lib/config";
-import { normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
+import { countWords, MAX_DESCRIPTION_WORDS, normalise, validateFields, validateFile, type FieldErrors } from "@/lib/validation";
 import Icon from "./Icon";
 import Reveal from "./Reveal";
 
@@ -149,7 +149,7 @@ function SxScenery() {
 }
 
 export default function SubmitForm() {
-  const [v, setV] = useState({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", link: "", website: "" });
+  const [v, setV] = useState({ name: "", regNo: "", email: "", branch: "", title: "", description: "", collaborators: "", link: "", website: "" });
   const [consent, setConsent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -195,6 +195,7 @@ export default function SubmitForm() {
     fd.set("email", fields.email);
     fd.set("branch", fields.branch);
     fd.set("title", fields.title);
+    fd.set("description", fields.description);
     fd.set("collaborators", fields.collaborators);
     fd.set("link", fields.link);
     fd.set("consent", "on");
@@ -231,7 +232,7 @@ export default function SubmitForm() {
   }
 
   function reset() {
-    setV({ name: "", regNo: "", email: "", branch: "", title: "", collaborators: "", link: "", website: "" });
+    setV({ name: "", regNo: "", email: "", branch: "", title: "", description: "", collaborators: "", link: "", website: "" });
     setConsent(false);
     setFile(null);
     setErrors({});
@@ -245,7 +246,8 @@ export default function SubmitForm() {
         {errors[k]}
       </small>
     ) : null;
-  const aria = (k: keyof FieldErrors) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `e-${k}` : undefined });
+  const words = countWords(v.description);
+  const aria = (k: keyof FieldErrors) =>({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `e-${k}` : undefined });
 
   return (
     <section id="submit" className="sx">
@@ -279,7 +281,7 @@ export default function SubmitForm() {
               <span className="sx-li-ic"><Icon name="user" size={18} /></span>Individual entry, one presenter
             </li>
             <li>
-              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme · prototype in PDF or DOCX
+              <span className="sx-li-ic"><Icon name="layers" size={18} /></span>Any theme · prototype as PDF, DOCX or image
             </li>
             <li>
               <span className="sx-li-ic"><Icon name="cloudUpload" size={18} /></span>Up to {MAX_FILE_MB} MB per file
@@ -369,6 +371,15 @@ export default function SubmitForm() {
                     <Err k="title" />
                   </Field>
 
+                  <Field icon="file">
+                    <label htmlFor="description">Description *</label>
+                    <textarea id="description" rows={8} placeholder={`Describe your idea in up to ${MAX_DESCRIPTION_WORDS} words`} value={v.description} onChange={set("description")} {...aria("description")} />
+                    <small className={words > MAX_DESCRIPTION_WORDS ? "err" : "count"}>
+                      {words} / {MAX_DESCRIPTION_WORDS} words
+                    </small>
+                    <Err k="description" />
+                  </Field>
+
                   <Field icon="users">
                     <label htmlFor="collab">Contributors (if any)</label>
                     <input id="collab" placeholder="Enter contributor names, if any" value={v.collaborators} onChange={set("collaborators")} />
@@ -407,7 +418,7 @@ export default function SubmitForm() {
                             <Icon name="cloudUpload" size={34} />
                           </motion.span>
                           <b>Drop your file here, or click to browse</b>
-                          <small>PDF or DOCX only · up to {MAX_FILE_MB} MB</small>
+                          <small>PDF, DOCX or image · up to {MAX_FILE_MB} MB</small>
                         </>
                       )}
                     </div>
@@ -415,7 +426,7 @@ export default function SubmitForm() {
                   </Field>
 
                   <Field icon="link">
-                    <label htmlFor="link">Prototype link *</label>
+                    <label htmlFor="link">Prototype link (optional)</label>
                     <input id="link" type="url" inputMode="url" autoComplete="off" placeholder="https://… link to your prototype" value={v.link} onChange={set("link")} {...aria("link")} />
                     <Err k="link" />
                   </Field>
